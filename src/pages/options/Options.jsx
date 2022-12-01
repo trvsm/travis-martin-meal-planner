@@ -20,8 +20,11 @@ export default function Options() {
     });
   }, []);
 
+  // don't invoke handler on element; it will run when element renders
   const clickHandler = (event) => {
-    console.log(event);
+    const clicked = event.target.id;
+    console.log(recipes)
+    // setActiveRecipe(recipes.filter(recipes.idMeal === clicked));
   };
 
   return (
@@ -35,8 +38,9 @@ export default function Options() {
             <fieldset className="options__meals-list">
               {Object.keys(recipes).length > 0 ? (
                 recipes.map((recipe) => (
-                  <label htmlFor={recipe.idMeal}
-                  onClick={clickHandler()}
+                  <label
+                    htmlFor={recipe.idMeal}
+                    onClick={clickHandler}
                     key={recipe.idMeal}
                   >
                     {recipe.strMeal}
