@@ -20,6 +20,10 @@
         border-radius: .5rem;
         padding: 1rem;
     }
+    &__meals-list{
+        display: flex;
+        flex-direction: column;
+    }
 
     &__recipes{
         width: 45vw;
@@ -37,5 +41,7 @@
             color: #fffae3;
         }
     }
-
+&__specs{
+    display: flex;
+}
 }
