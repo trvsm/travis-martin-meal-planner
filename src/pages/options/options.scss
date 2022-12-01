@@ -1,0 +1,41 @@
+.options{
+    &__wrapper{
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    &__left{
+        width: 45vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    &__meals, &__selected{
+        height: 40vh;
+        background-color: darkblue;
+        border-radius: .5rem;
+        padding: 1rem;
+    }
+
+    &__recipes{
+        width: 45vw;
+        background-color: darkblue;
+        border-radius: .5rem;
+        padding: 1rem;
+        height: 84vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &__link{
+        color: #fffae3;
+        &:visited{
+            color: #fffae3;
+        }
+    }
+
+}

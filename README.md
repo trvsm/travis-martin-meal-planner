@@ -1,3 +1,14 @@
+Goal of this project:
+Simplify user experience with online recipes.
+Why? Online recipes don't play well with the flow of cooking:
+-gather supplies
+-combine/transform
+-enjoy
+
+I have seen tools to export a shopping list from a recipe, but this will leave you with a shopping list calling for fractions of items and repeats each time you add a recipe's ingredients.
+
+The core feature is after selecting some recipes a shopping list is compiled and simplified so you can go shopping, get what you need, then enjoy your cooking and eating!
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
