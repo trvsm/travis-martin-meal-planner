@@ -3,6 +3,7 @@ import "./options.scss";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Recipe from "../../components/recipe/Recipe";
 
 const BACK_END = process.env.REACT_APP_BACK_END;
 
@@ -15,17 +16,21 @@ export default function Options() {
     // on page load get recipes.  May end up moving this state up to app if search implemented; landing will set state and pass down
     axios.get(`${BACK_END}/recipes`).then((response) => {
       setRecipes(response.data);
+
       // for testing set active to first item
-      setActiveRecipe(response.data[0]);
+      // setActiveRecipe(response.data[0]);
     });
   }, []);
 
   // don't invoke handler on element; it will run when element renders
-  const clickHandler = (event) => {
+  // there's a rerender that's clearing state
+
+  
+  const clickHandler = (event)=>{
     const clicked = event.target.id;
-    console.log(recipes)
-    // setActiveRecipe(recipes.filter(recipes.idMeal === clicked));
-  };
+    // is setting correct recipe to state for a moment before cleared
+    setActiveRecipe({});
+    setActiveRecipe(recipes.filter((recipe) => recipe.idMeal === clicked));}
 
   return (
     <div className="options__wrapper">
@@ -47,6 +52,7 @@ export default function Options() {
                     <input
                       type="checkbox"
                       id={recipe.idMeal}
+                      placeholder={recipe}
                       className="options__meals-item"
                     ></input>
                   </label>
@@ -76,36 +82,12 @@ export default function Options() {
       {/* recipe for meal in focus */}
       <div className="options__recipes">
         {Object.keys(activeRecipe).length > 0 ? (
-          <>
-            <h3 className="options__recipe-title">{activeRecipe.strMeal}</h3>
-            <h5 className="options__label">source:</h5>
-            <a href={activeRecipe.strSource} className="option__recipe-source">
-              {activeRecipe.strSource}
-            </a>
-            <div className="options__specs">
-              <h5 className="options__label">cuisine:</h5>
-              <p className="options__cuisine">{activeRecipe.strArea}</p>
-              <h5 className="options__label">category:</h5>
-              <p className="options__category">{activeRecipe.strCategory}</p>
-            </div>
-            <h5 className="options__label">instructions:</h5>
-            <p className="options__recipe-description">
-              {activeRecipe.strInstructions}
-            </p>
-            <ul className="options__recipe-ingredients">
-              Ingredients
-              <li className="options__ingredient">ingredient</li>
-              <li className="options__ingredient">ingredient</li>
-              <li className="options__ingredient">ingredient</li>
-              <li className="options__ingredient">ingredient</li>
-              <li className="options__ingredient">ingredient</li>
-              <li className="options__ingredient">ingredient</li>
-            </ul>
-          </>
-        ) : (
+          <Recipe props={activeRecipe}/>
+        ) : (<>
           <h3 className="options__recipe-title">
             Click a recipe to view details
           </h3>
+        </>
         )}
         <Link to={"/list"}>
           <div className="options__link">Get Your Shopping List {">"}</div>
