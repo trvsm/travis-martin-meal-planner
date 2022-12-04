@@ -1,6 +1,6 @@
 
 export default function Recipe(props){
-console.log(props)
+// console.log(props)
     return (
       <>
         <h3 className="recipe__title">{props.props[0].strMeal}</h3>

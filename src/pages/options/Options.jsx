@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Recipe from "../../components/recipe/Recipe";
+import MealOptions from "../../components/mealOptions/MealOptions";
 
 const BACK_END = process.env.REACT_APP_BACK_END;
 
@@ -16,21 +17,15 @@ export default function Options() {
     // on page load get recipes.  May end up moving this state up to app if search implemented; landing will set state and pass down
     axios.get(`${BACK_END}/recipes`).then((response) => {
       setRecipes(response.data);
-
-      // for testing set active to first item
-      // setActiveRecipe(response.data[0]);
     });
   }, []);
 
   // don't invoke handler on element; it will run when element renders
-  // there's a rerender that's clearing state
-
-  
-  const clickHandler = (event)=>{
+  const clickHandler = (event) => {
     const clicked = event.target.id;
-    // is setting correct recipe to state for a moment before cleared
-    setActiveRecipe({});
-    setActiveRecipe(recipes.filter((recipe) => recipe.idMeal === clicked));}
+    // find the recipe that matches id of clicked recipe and set to state to display
+    setActiveRecipe(recipes.filter((recipe) => recipe.idMeal === clicked));
+  };
 
   return (
     <div className="options__wrapper">
@@ -42,21 +37,7 @@ export default function Options() {
           <>
             <fieldset className="options__meals-list">
               {Object.keys(recipes).length > 0 ? (
-                recipes.map((recipe) => (
-                  <label
-                    htmlFor={recipe.idMeal}
-                    onClick={clickHandler}
-                    key={recipe.idMeal}
-                  >
-                    {recipe.strMeal}
-                    <input
-                      type="checkbox"
-                      id={recipe.idMeal}
-                      placeholder={recipe}
-                      className="options__meals-item"
-                    ></input>
-                  </label>
-                ))
+                <MealOptions props={recipes} clickHandler={clickHandler} />
               ) : (
                 <label>loading...</label>
               )}
@@ -82,12 +63,13 @@ export default function Options() {
       {/* recipe for meal in focus */}
       <div className="options__recipes">
         {Object.keys(activeRecipe).length > 0 ? (
-          <Recipe props={activeRecipe}/>
-        ) : (<>
-          <h3 className="options__recipe-title">
-            Click a recipe to view details
-          </h3>
-        </>
+          <Recipe props={activeRecipe} />
+        ) : (
+          <>
+            <h3 className="options__recipe-title">
+              Click a recipe to view details
+            </h3>
+          </>
         )}
         <Link to={"/list"}>
           <div className="options__link">Get Your Shopping List {">"}</div>
