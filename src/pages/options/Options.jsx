@@ -45,6 +45,10 @@ export default function Options() {
     setSelected(checked);
   };
   // TODO: add useEffect to set selected meals when checked is updated
+  useEffect(()=>(selected.forEach(id => {
+
+    console.log(id);
+  })),[selected]);
 
   return (
     <>
