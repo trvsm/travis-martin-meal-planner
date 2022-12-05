@@ -1,4 +1,4 @@
-import "./options.scss";
+ import "./options.scss";
 
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -38,14 +38,22 @@ export default function Options() {
     for (let index = 1; index < event.target.length; index++) {
       // if a checkbox is checked add id to checked array
       if (event.target[index].checked) {
-        checked.push(event.target[index].id);
+        let checkMeal = {}
+        checkMeal.id = event.target[index].id;
+        // make sure there's a name accessible through event
+        checkMeal.name = null;
+        // push the object, not just property
+        checked.push(checkMeal);
       }
     }
     // set all checked ids to state
+    // is checked an array of objects? if so name and id
+    // if I can get name and ID that's all i need for list sections
     setSelected(checked);
   };
   // TODO: add useEffect to set selected meals when checked is updated
   useEffect(()=>(selected.forEach(id => {
+// for each id look at list if match add to array 
 
     console.log(id);
   })),[selected]);
