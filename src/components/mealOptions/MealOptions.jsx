@@ -15,6 +15,7 @@ export default function MealOptions({ props,submitHandler, clickHandler }) {
                 type="checkbox"
                 id={recipe.idMeal}
                 className="meals__item"
+                name={recipe.strMeal}
               ></input>
             </label>
           ))
