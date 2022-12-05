@@ -1,7 +1,8 @@
-export default function MealOptions({ props, clickHandler }) {
+export default function MealOptions({ props,submitHandler, clickHandler }) {
   return (
-    <>
-      <fieldset className="options__meals-list">
+    // make this a form, pass submit handler from above
+    <form onSubmit={submitHandler}>
+      <fieldset className="meals__list">
         {Object.keys(props).length > 0 ? (
           props.map((recipe) => (
             <label
@@ -13,8 +14,7 @@ export default function MealOptions({ props, clickHandler }) {
               <input
                 type="checkbox"
                 id={recipe.idMeal}
-                placeholder={recipe}
-                className="options__meals-item"
+                className="meals__item"
               ></input>
             </label>
           ))
@@ -22,6 +22,7 @@ export default function MealOptions({ props, clickHandler }) {
           <label>loading...</label>
         )}
       </fieldset>
-    </>
+      <button>add to selection</button>
+    </form>
   );
 }
