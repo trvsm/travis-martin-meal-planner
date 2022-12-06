@@ -11,6 +11,7 @@ const BACK_END = process.env.REACT_APP_BACK_END;
 
 export default function Options() {
   const [recipes, setRecipes] = useState([]);
+
   // when checklist form submitted set all checked meals to state
   const [selected, setSelected] = useState([]);
   // filter recipes list displayed in options
@@ -35,26 +36,18 @@ export default function Options() {
   const submitHandler = (event) => {
     event.preventDefault();
     // array to hold ids of checked recipes
-    let checked = selected;
+    let checked = [];
     for (let index = 1; index < event.target.length; index++) {
       if (event.target[index].checked) {
-        let checkMeal = {};
-        // if a checkbox is checked add id and name to object
-        checkMeal.id = event.target[index].id;
-        checkMeal.name = event.target[index].name;
-        checked.push(checkMeal);
+        checked.push(event.target[index].id);
+        console.log(checked);
       }
     }
-    setSelected(checked);
+    // will this work with spread operator, or start with checked = selected above?
+    setFiltered(recipes.filter((recipe)=>checked.indexOf(recipe.idMeal)===-1))
+    setSelected(...selected, recipes.filter((recipe)=>checked.indexOf(recipe.idMeal)!==-1))
   };
 
-
-  // TODO: loop through ids in selected
-  useEffect(
-    () =>
-      setFiltered(recipes.filter((recipe) => recipe.idMeal !== selected[0].id)),
-    [selected]
-  );
 
   return (
     <>

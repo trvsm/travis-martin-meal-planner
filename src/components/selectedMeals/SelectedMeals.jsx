@@ -1,18 +1,18 @@
 export default function SelectedMeals({ props, clickHandler }) {
-    console.log(props);
+    // console.log(props);
   return (
     // make this a form, pass submit handler from above
     <form>
       <fieldset className="selected__list">
         {Object.keys(props).length > 0 ? (
           props.map((recipe) => (
-            <label htmlFor={recipe.id} onClick={clickHandler} key={recipe.id}>
-              {recipe.name}
+            <label htmlFor={recipe.idMeal} onClick={clickHandler} key={recipe.idMeal}>
+              {recipe.strMeal}
               <input
                 type="checkbox"
-                id={recipe.id}
+                id={recipe.idMeal}
                 className="selected__item"
-                name={recipe.name}
+                name={recipe.strMeal}
               ></input>
             </label>
           ))
