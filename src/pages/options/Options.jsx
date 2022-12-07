@@ -45,7 +45,7 @@ export default function Options() {
     }
     // will this work with spread operator, or start with checked = selected above?
     setFiltered(recipes.filter((recipe)=>checked.indexOf(recipe.idMeal)===-1))
-    setSelected(...selected, recipes.filter((recipe)=>checked.indexOf(recipe.idMeal)!==-1))
+    setSelected(recipes.filter((recipe)=>checked.indexOf(recipe.idMeal)!==-1))
   };
 
 
