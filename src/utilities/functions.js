@@ -19,13 +19,13 @@ let correlatedIngredients = [];
 let converted = [];
 
 // get meal in array form for manipulation
-const mealEntries = Object.entries(testMeal);
+export const entries=(object) =>{ Object.entries(object)}
 
 // while populating combined list if there is a missing key populate with 1
 
 // setup regular expressions for matching object fields and measurement terms
-const ingredientMatch = /ingredient/i;
-const measurementMatch = /measure/i;
+export const ingredientMatch = /ingredient/i;
+export const measurementMatch = /measure/i;
 
 // match any letters to separate unit from quantity
 const letterMatch = /[a-z]/;
@@ -54,15 +54,17 @@ const noNumberMatch = /[^0-9^/^.]/;
  * @param {a regular expression to match desired entries} targetKey
  * @param {a destination for the values associated with each instance of targetKey} outputArray
  */
-const mapNonEmpty = (inputArray, targetKey, outputArray) => {
+export const mapNonEmpty = (inputArray, targetKey) => {
+    const output = []
   inputArray.map((entry) => {
     if (entry[0].match(targetKey)) {
       if (entry[1]) {
         // if truthy; if field is not empty push the value to output.  Since this is a flattened object desired value should always be index 1.
-        outputArray.push(entry[1]);
-      }
+        output.push(entry[1]);
     }
-  });
+}
+});
+return output
 };
 
 /**
@@ -183,10 +185,10 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
 // possibly improve this by populating an empty array instead of messing with an existing one
 
 // map through recipe, add ingredient names to ingredientItems array
-mapNonEmpty(mealEntries, ingredientMatch, ingredientItems);
+// mapNonEmpty(entries(), ingredientMatch, ingredientItems);
 
-// map through again: measurements to ingredientMeasures array
-mapNonEmpty(mealEntries, measurementMatch, ingredientMeasures);
+// // map through again: measurements to ingredientMeasures array
+// mapNonEmpty(entries(), measurementMatch, ingredientMeasures);
 
 // loop through ingredientMeasures, separate quantity & unit into two fields
 separateUnits(ingredientMeasures, letterMatch, valueOnly, unitOnly);

@@ -21,43 +21,37 @@ export default function List() {
 
   // this can refactor with lodash for readability
   // add unique items to an output, add repeated items to their first occurrence
-  const ingredientTracker = (inputArray) => {
-    let outputArray = [];
-    let firstCollection = inputArray[0];
-    // if it is first collection there are no repeats in output, add all elements
-    firstCollection.forEach((element) => {
-      outputArray.push(element);
-    });
-
-    for (let topLv = 1; topLv < inputArray.length; topLv++) {
-      // for each remaining collection compare to what's in output array
+  const ingredientTracker = (recipeList) => {
+    let shoppingList = [];
+    for (let recipeIndex = 0; recipeIndex < recipeList.length; recipeIndex++) {
+      // for each remaining ingredients compare to what's in output array
       // if match add to existing, else create new entry
-      let collection = inputArray[topLv];
-      collection.forEach(
+      let ingredients = recipeList[recipeIndex];
+      ingredients.forEach(
         //comparison: an ingredient in a recipe
-        (comparison) => {
+        (ingredient) => {
           let currentList = [];
           // add each ingredient name in output to new array to check against
-          outputArray.forEach((element) => {
+          shoppingList.forEach((element) => {
             currentList.push(element[0]);
           });
-          // if current ingredients contains comparison ingredient add comparison quantity to existing quantity
-          if (currentList.find((element) => element === comparison[0])) {
-            //   for each entry in output array, if element[0](ingredient name) matches comparison[0] add quantity
-            outputArray.forEach((element) => {
-              if (element[0] === comparison[0]) {
-                // element[1] & comparison[1] hold logged and current quantities of ingredient respectively
-                element[1] += comparison[1];
+          // if current ingredients contains ingredient add ingredient quantity to existing quantity
+          if (currentList.find((element) => element === ingredient[0])) {
+            //   for each entry in output array, if element[0](ingredient name) matches ingredient[0] add quantity
+            shoppingList.forEach((element) => {
+              if (element[0] === ingredient[0]) {
+                // element[1] & ingredient[1] hold logged and current quantities of ingredient respectively
+                element[1] += ingredient[1];
               }
             });
           } else {
             // if entry doesn't exist add it to output
-            outputArray = [...outputArray, comparison];
+            shoppingList = [...shoppingList, ingredient];
           }
         }
       );
     }
-    return outputArray;
+    return shoppingList;
   };
 
   let [ingredients, setIngredients] = useState(ingredientTracker(meals));
