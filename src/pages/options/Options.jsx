@@ -14,7 +14,7 @@ export default function Options({recipes, filtered, selected,activeRecipe, click
       <div className="options__wrapper">
         <div className="options__left">
           {/* list of search results or default meals */}
-          <div className="options__meals">
+          <section className="options__meals">
             <h3 className="options__meals-title">Meals to choose from</h3>
             {/* will map through options to generate this list */}
             {Object.keys(filtered).length > 0 ? (
@@ -30,10 +30,10 @@ export default function Options({recipes, filtered, selected,activeRecipe, click
                 submitHandler={submitHandler}
               />
             )}
-          </div>
+          </section>
 
           {/* list of user selected meals */}
-          <div className="options__selected">
+          <section className="options__selected">
             <h3 className="options__selected-title">Selected Meals</h3>
             {/* will map through options to generate this list */}
             {Object.keys(selected).length > 0 ? (
@@ -41,24 +41,27 @@ export default function Options({recipes, filtered, selected,activeRecipe, click
             ) : (
               <p>please select meal options from above</p>
             )}
-          </div>
+          </section>
         </div>
 
         {/* recipe for meal in focus */}
-        <div className="options__recipes">
+        <section className="options__recipe-wrap">
+          <article className="options__recipe">
+
           {Object.keys(activeRecipe).length > 0 ? (
             <Recipe props={activeRecipe} />
-          ) : (
-            <>
+            ) : (
+              <>
               <h3 className="options__recipe-title">
                 Click a recipe to view details
               </h3>
             </>
           )}
+          </article>
           <Link to={"/list"}>
             <div className="options__link">Get Your Shopping List {">"}</div>
           </Link>
-        </div>
+        </section>
       </div>
     </>
   );

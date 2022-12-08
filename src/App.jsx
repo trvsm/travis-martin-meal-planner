@@ -68,7 +68,7 @@ function App() {
             />
           }
         />
-        <Route path="/list" element={<List />} />
+        <Route path="/list" element={<List selected={selected}/>} />
       </Routes>
     </BrowserRouter>
   );
