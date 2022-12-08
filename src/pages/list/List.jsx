@@ -19,6 +19,7 @@ export default function List() {
     [["mushrooms", 79, "ml"]],
   ];
 
+  // this can refactor with lodash for readability
   // add unique items to an output, add repeated items to their first occurrence
   const ingredientTracker = (inputArray) => {
     let outputArray = [];
@@ -60,7 +61,6 @@ export default function List() {
   };
 
   let [ingredients, setIngredients] = useState(ingredientTracker(meals));
-
 
   return (
     <div className="list__wrapper">
