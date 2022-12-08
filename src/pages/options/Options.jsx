@@ -1,53 +1,13 @@
 import "./options.scss";
 
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
 import Recipe from "../../components/recipe/Recipe";
 import MealOptions from "../../components/mealOptions/MealOptions";
 import SelectedMeals from "../../components/selectedMeals/SelectedMeals";
 
 const BACK_END = process.env.REACT_APP_BACK_END;
 
-export default function Options() {
-  const [recipes, setRecipes] = useState([]);
-
-  // when checklist form submitted set all checked meals to state
-  const [selected, setSelected] = useState([]);
-  // filter recipes list displayed in options
-  const [filtered, setFiltered] = useState([]);
-
-  const [activeRecipe, setActiveRecipe] = useState({});
-
-  useEffect(() => {
-    // on page load get recipes.  May end up moving this state up to app if search implemented; landing will set state and pass down
-    axios.get(`${BACK_END}/recipes`).then((response) => {
-      setRecipes(response.data);
-    });
-  }, []);
-
-  // don't invoke handler on the element using it, else it will run when element renders
-  const clickHandler = (event) => {
-    const clicked = event.target.id;
-    // find the recipe that matches id of clicked recipe and set to state to display
-    setActiveRecipe(recipes.filter((recipe) => recipe.idMeal === clicked));
-  };
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-    // array to hold ids of checked recipes
-    let checked = [];
-    for (let index = 1; index < event.target.length; index++) {
-      if (event.target[index].checked) {
-        checked.push(event.target[index].id);
-        console.log(checked);
-      }
-    }
-    // will this work with spread operator, or start with checked = selected above?
-    setFiltered(recipes.filter((recipe)=>checked.indexOf(recipe.idMeal)===-1))
-    setSelected(recipes.filter((recipe)=>checked.indexOf(recipe.idMeal)!==-1))
-  };
-
+export default function Options({recipes, filtered, selected,activeRecipe, clickHandler, submitHandler}) {
 
   return (
     <>

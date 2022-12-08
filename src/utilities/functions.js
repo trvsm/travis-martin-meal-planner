@@ -106,10 +106,10 @@ const separateUnits = (
 };
 /**
  *
- * @param {array} nameArray  with name of field eg: <ingredient name>
- * @param {array} valueArray with value corresponding to name above
- * @param {array} unitArray  with unit corresponding to value above
- * @param {array} outputArray output where all three fields above will be grouped for further processing
+ * @param {Array} nameArray  with name of field eg: <ingredient name>
+ * @param {Array} valueArray with value corresponding to name above
+ * @param {Array} unitArray  with unit corresponding to value above
+ * @param {Array} outputArray output where all three fields above will be grouped for further processing
  */
 
 const correlate = (nameArray, valueArray, unitArray, outputArray) => {

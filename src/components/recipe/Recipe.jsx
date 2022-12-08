@@ -1,6 +1,5 @@
 // importing a named export requires destructuring
 import { useState } from "react";
-import { useEffect } from "react";
 import {
   mapNonEmpty,
   ingredientMatch,
@@ -19,7 +18,7 @@ export default function Recipe({ props }) {
     return items;
   };
 let array =ingredientEntry();
-  const [linkedIngredients, setLinkedIngredients] = useState(array);
+  const [linkedIngredients, _setLinkedIngredients] = useState(array);
 
   return (
     <>
