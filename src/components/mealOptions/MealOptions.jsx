@@ -1,4 +1,4 @@
-export default function MealOptions({ props,submitHandler, clickHandler }) {
+export default function MealOptions({ props, submitHandler, clickHandler }) {
   return (
     // make this a form, pass submit handler from above
     <form onSubmit={submitHandler}>
