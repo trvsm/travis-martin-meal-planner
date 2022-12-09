@@ -59,7 +59,7 @@ const separateUnits = (valuePlusUnit, matchExpression) => {
 
     let value;
     let unit;
-    // need a condition here if execOutput falsy
+    // need a condition here if execOutput falsy eg: discrete quantities like egg white, 1
     if (!execOutput) {
       value = element;
       unit = "";
@@ -143,6 +143,7 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
     let value;
     if (unit === "") {
       // discrete quantity; call spoonacular for a conversion using ingredient name
+
       return console.log(`call Spoonacular for ${name}`);
     }
     if (unit.match(/pinch/i)) {
@@ -166,7 +167,13 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
       output.push([name, value, "ml"]);
       return output;
     }
-    if (unit.match(/g(?:ram)?(?!r)/gi)|| unit.match(/m[il]/ig)) {
+    if (unit.match(/t[es][ap]/gi)) {
+      // expression to match teaspoon: tsp, teaspoon
+      value = quantity * 5;
+      output.push([name, value, "ml"]);
+      return output;
+    }
+      if (unit.match(/g(?:ram)?(?!r)/gi)|| unit.match(/m[il]/ig)) {
       // expression to match teaspoon: tsp, teaspoon
       value = quantity;
       output.push([name, value, "ml"]);
