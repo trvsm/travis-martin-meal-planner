@@ -20,8 +20,12 @@
         border-radius: .5rem;
         padding: 1rem;
     }
+    &__meals-list{
+        display: flex;
+        flex-direction: column;
+    }
 
-    &__recipes{
+    &__recipe-wrap{
         width: 45vw;
         background-color: darkblue;
         border-radius: .5rem;
@@ -31,11 +35,30 @@
         flex-direction: column;
         justify-content: space-between;
     }
+    &__recipe{
+        height: 78vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: darken($color: darkblue, $amount: 10);
+        border-radius: .5rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+
+    }
     &__link{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 1rem;
+        background-color: darken($color: darkblue, $amount: 10);
+        border-radius: .5rem;
+        height: 4vh;
         color: #fffae3;
         &:visited{
             color: #fffae3;
         }
     }
-
+&__specs{
+    display: flex;
+}
 }
