@@ -13,15 +13,14 @@ export default function Recipe({ props }) {
   let ingredientEntry = () => {
     let items = [];
     for (let index = 0; index < ingredients.length; index++) {
-      items.push(`${ingredients[index]}, ${measures[index]}`);
+      items.push(`${ingredients[index]}, ${measures[index]} `);
     }
     return items;
   };
   let array = ingredientEntry();
   const linkedIngredients = useState(array);
 
-  return (
-    <>
+  return (<>
       {Object.keys(props).length > 0 ? (
         <>
           <h3 className="recipe__title">{props[0].strMeal}</h3>
@@ -45,12 +44,12 @@ export default function Recipe({ props }) {
               ))
             ) : (
               <li>loading...</li>
-            )}
+              )}
           </ul>
         </>
       ) : (
         <p>loading...</p>
       )}
-    </>
+        </>
   );
 }

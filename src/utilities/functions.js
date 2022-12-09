@@ -1,11 +1,9 @@
-// while populating combined list if there is a missing key populate with 1
-
 // setup regular expressions for matching object fields and measurement terms
 export const ingredientMatch = /ingredient/i;
 export const measurementMatch = /measure/i;
 
 // match any letters to separate unit from quantity
-const letterMatch = /[a-z]/;
+const letterMatch = /[a-z]/i;
 
 // to match dicrete quantities eg: carrot: 1, egg(s): 1
 
@@ -151,7 +149,7 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
       output.push([name, value, "ml"]);
       return output;
     }
-    if (unit.match(/[lp][bo]/ig)) {
+    if (unit.match(/[lp][bo]/gi)) {
       value = quantity * 454;
       output.push([name, value, "ml"]);
       return output;
@@ -173,9 +171,15 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
       output.push([name, value, "ml"]);
       return output;
     }
-      if (unit.match(/g(?:ram)?(?!r)/gi)|| unit.match(/m[il]/ig)) {
-      // expression to match teaspoon: tsp, teaspoon
+    if (unit.match(/g(?:ram)?(?!r)/gi) || unit.match(/m[il]/gi)) {
+      // expression to match g, gram, grams, ml, mil, millilitres
       value = quantity;
+      output.push([name, value, "ml"]);
+      return output;
+    }
+    if (unit.match(/o[uz]/ig)) {
+      // expression to match g, gram, grams, ml, mil, millilitres
+      value = quantity*30;
       output.push([name, value, "ml"]);
       return output;
     } else {
@@ -186,10 +190,6 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
   });
   return output;
 };
-// possibly improve this by populating an empty array instead of messing with an existing one
-
-// success!  all ingredients converted to mL.  This is not perfectly accurate but will serve to build a reasonable shopping list!
-// console.log(correlatedIngredients);
 
 export const ingredientTracker = (recipeList) => {
   let shoppingList = [];
