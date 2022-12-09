@@ -58,9 +58,13 @@ export default function Options({recipes, filtered, selected,activeRecipe, click
             </>
           )}
           </article>
+          {selected.length>0?
+        (
           <Link to={"/list"}>
             <div className="options__link">Get Your Shopping List {">"}</div>
           </Link>
+        ):<div className="options__link">Select meal options, then generate a shopping list!</div>  
+        }
         </section>
       </div>
     </>

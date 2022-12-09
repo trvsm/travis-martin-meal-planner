@@ -40,7 +40,6 @@ function App() {
     for (let index = 1; index < event.target.length; index++) {
       if (event.target[index].checked) {
         checked.push(event.target[index].id);
-        console.log(checked);
       }
     }
     // will this work with spread operator, or start with checked = selected above?
