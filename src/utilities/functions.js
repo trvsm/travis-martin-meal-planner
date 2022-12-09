@@ -166,16 +166,16 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
       output.push([name, value, "ml"]);
       return output;
     }
-    if (unit.match(/t[es][ap]/gi)) {
+    if (unit.match(/g(?:ram)?(?!r)/gi)|| unit.match(/m[il]/ig)) {
       // expression to match teaspoon: tsp, teaspoon
-      value = quantity * 5;
+      value = quantity;
       output.push([name, value, "ml"]);
       return output;
     } else {
       // add item to an array that will be returned to user to ask what to do
       console.log(element);
     }
-    output.push([name, value, "ml"]);
+    // output.push([name, value, "ml"]);
   });
   return output;
 };
