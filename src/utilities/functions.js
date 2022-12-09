@@ -143,10 +143,15 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
     let value;
     if (unit === "") {
       // discrete quantity; call spoonacular for a conversion using ingredient name
-      return console.log(`call Spoonacular`);
+      return console.log(`call Spoonacular for ${name}`);
     }
     if (unit.match(/pinch/i)) {
       value = quantity * 0.31;
+      output.push([name, value, "ml"]);
+      return output;
+    }
+    if (unit.match(/[lp][bo]/ig)) {
+      value = quantity * 454;
       output.push([name, value, "ml"]);
       return output;
     }
