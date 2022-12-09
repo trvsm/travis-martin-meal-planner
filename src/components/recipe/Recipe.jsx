@@ -17,8 +17,8 @@ export default function Recipe({ props }) {
     }
     return items;
   };
-let array =ingredientEntry();
-  const [linkedIngredients, _setLinkedIngredients] = useState(array);
+  let array = ingredientEntry();
+  const linkedIngredients = useState(array);
 
   return (
     <>
@@ -39,17 +39,13 @@ let array =ingredientEntry();
           <p className="recipe__description">{props[0].strInstructions}</p>
           <ul className="recipe__recipe-ingredients">
             Ingredients
-            <>
-              {linkedIngredients? (
-                linkedIngredients.map((ingredient, index) => (
-                  <li key={`${ingredient}${index}`}>
-                    {ingredient}
-                  </li>
-                ))
-              ) : (
-                <li>loading...</li>
-              )}
-            </>
+            {linkedIngredients ? (
+              linkedIngredients.map((ingredient, index) => (
+                <li key={`${ingredient}${index}`}>{ingredient}</li>
+              ))
+            ) : (
+              <li>loading...</li>
+            )}
           </ul>
         </>
       ) : (

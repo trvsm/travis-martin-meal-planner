@@ -5,10 +5,14 @@ import Recipe from "../../components/recipe/Recipe";
 import MealOptions from "../../components/mealOptions/MealOptions";
 import SelectedMeals from "../../components/selectedMeals/SelectedMeals";
 
-const BACK_END = process.env.REACT_APP_BACK_END;
-
-export default function Options({recipes, filtered, selected,activeRecipe, clickHandler, submitHandler}) {
-
+export default function Options({
+  recipes,
+  filtered,
+  selected,
+  activeRecipe,
+  clickHandler,
+  submitHandler,
+}) {
   return (
     <>
       <div className="options__wrapper">
@@ -47,24 +51,25 @@ export default function Options({recipes, filtered, selected,activeRecipe, click
         {/* recipe for meal in focus */}
         <section className="options__recipe-wrap">
           <article className="options__recipe">
-
-          {Object.keys(activeRecipe).length > 0 ? (
-            <Recipe props={activeRecipe} />
+            {Object.keys(activeRecipe).length > 0 ? (
+              <Recipe props={activeRecipe} />
             ) : (
               <>
-              <h3 className="options__recipe-title">
-                Click a recipe to view details
-              </h3>
-            </>
-          )}
+                <h3 className="options__recipe-title">
+                  Click a recipe to view details
+                </h3>
+              </>
+            )}
           </article>
-          {selected.length>0?
-        (
-          <Link to={"/list"}>
-            <div className="options__link">Get Your Shopping List {">"}</div>
-          </Link>
-        ):<div className="options__link">Select meal options, then generate a shopping list!</div>  
-        }
+          {selected.length > 0 ? (
+            <Link to={"/list"}>
+              <div className="options__link">Get Your Shopping List {">"}</div>
+            </Link>
+          ) : (
+            <div className="options__link">
+              Select meal options, then generate a shopping list!
+            </div>
+          )}
         </section>
       </div>
     </>

@@ -1,28 +1,3 @@
-// setup array to hold ingredient names
-let ingredientItems = [];
-
-// setup array to hold measurements for each ingredient
-let ingredientMeasures = [];
-
-// arrays to hold value and unit respectively once separated
-let valueOnly = [];
-let unitOnly = [];
-
-// array to hold value with fraction converted to number
-let fractionFree = [];
-
-// setup array to hold coupled ingredients & measures
-let correlatedIngredients = [];
-
-// converted will hold an entry for each ingredient
-// TODO: unused, remove?
-let converted = [];
-
-// get meal in array form for manipulation
-export const entries = (object) => {
-  Object.entries(object);
-};
-
 // while populating combined list if there is a missing key populate with 1
 
 // setup regular expressions for matching object fields and measurement terms
@@ -30,11 +5,11 @@ export const ingredientMatch = /ingredient/i;
 export const measurementMatch = /measure/i;
 
 // match any letters to separate unit from quantity
-export const letterMatch = /[a-z]/;
+const letterMatch = /[a-z]/;
 
 // to match dicrete quantities eg: carrot: 1, egg(s): 1
-export const noLetterMatch = /[^a-z]/gi;
-// TODO: unused, remove?
+
+// const noLetterMatch = /[^a-z]/gi;
 /* ??Do I want to leave discrete unconverted??  */
 
 // ensure cases where conversions are in measure just take first instance
@@ -48,7 +23,8 @@ export const noLetterMatch = /[^a-z]/gi;
 
 // to match pure descriptive terms eg: sprinkle, to serve
 // TODO: unused, remove?
-const noNumberMatch = /[^0-9^/^.]/;
+
+// const noNumberMatch = /[^0-9^/^.]/;
 
 /**
  * Takes an array, uses a regular expresssion to locate a group of similarly named keys, add them to a target output array
@@ -74,7 +50,7 @@ export const mapNonEmpty = (inputArray, targetKey) => {
  * @param {string[]} valuePlusUnit with string entries containing quantity followed by unit
  * @param {RegExp} matchExpression: a regular expression to determine where to separate field; often will match on /[a-z]/ to separate units with english letter names
  */
-export const separateUnits = (valuePlusUnit, matchExpression) => {
+const separateUnits = (valuePlusUnit, matchExpression) => {
   let output = [];
   valuePlusUnit.forEach((element, index) => {
     // exec method returns an object including index of match
@@ -82,6 +58,14 @@ export const separateUnits = (valuePlusUnit, matchExpression) => {
     // slice from start of string to index to return number. May include fractions eg 3/4.  will compute fraction to number later
 
     let value;
+    let unit;
+    // need a condition here if execOutput falsy
+    if (!execOutput) {
+      value = element;
+      unit = "";
+      output[index] = [value.toString(), unit];
+      return;
+    }
     // if no number is returned set value to 1, eg; clove => 1 clove
     if (!element.slice(0, execOutput.index)) {
       value = 1;
@@ -89,7 +73,6 @@ export const separateUnits = (valuePlusUnit, matchExpression) => {
       value = element.slice(0, execOutput.index);
     }
     // slice from index to end of string to return unit
-    let unit;
     // if the first character is a letter should be a discrete measure eg: pinch
     if (execOutput.index === 0) {
       unit = element;
@@ -106,7 +89,7 @@ export const separateUnits = (valuePlusUnit, matchExpression) => {
  * @param {Array} valueArray with value corresponding to name above
  */
 
-export const correlate = (nameArray, valueArray) => {
+const correlate = (nameArray, valueArray) => {
   let output = [];
   for (let i = 0; i < nameArray.length; i++) {
     // if value array is empty here set value to one eg: cinnamon stick
@@ -118,7 +101,7 @@ export const correlate = (nameArray, valueArray) => {
   }
   return output;
 };
-export const convertFraction = (inputArray) => {
+const convertFraction = (inputArray) => {
   let output = [];
   let value;
   inputArray.forEach((element) => {
@@ -151,54 +134,48 @@ export const convertFraction = (inputArray) => {
 
 // this function takes an array with a number of non-standardized food measurements and converts as many as possible to mL
 // cases more specific to more general: kg then g, tbsp then tsp
-export const convertMeasures = (
-  arrayWithMeasures,
-  indexOfValue,
-  indexOfUnit
-) => {
+const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
   let output = [];
   arrayWithMeasures.forEach((element) => {
-    let name = element[0]
+    let name = element[0];
     const quantity = element[indexOfValue];
     const unit = element[indexOfUnit];
     let value;
     if (unit === "") {
       // discrete quantity; call spoonacular for a conversion using ingredient name
-    return console.log(`call Spoonacular`);
+      return console.log(`call Spoonacular`);
     }
     if (unit.match(/pinch/i)) {
       value = quantity * 0.31;
-    output.push([name, value, 'ml'])
-    return output
+      output.push([name, value, "ml"]);
+      return output;
     }
     if (unit.match(/cup/gi)) {
       value = quantity * 237;
-    output.push([name, value, 'ml'])
-    return output
+      output.push([name, value, "ml"]);
+      return output;
     }
     if (unit.match(/t[ab][bls]/gi)) {
       // expression to match tablespoon: tbs, tbsp, tblsp
       value = quantity * 15;
-    output.push([name, value, 'ml'])
-    return output
+      output.push([name, value, "ml"]);
+      return output;
     }
     if (unit.match(/t[es][ap]/gi)) {
       // expression to match teaspoon: tsp, teaspoon
       value = quantity * 5;
-    output.push([name, value, 'ml'])
-    return output
+      output.push([name, value, "ml"]);
+      return output;
     } else {
       // add item to an array that will be returned to user to ask what to do
       console.log(element);
     }
-    output.push([name, value, 'ml'])
+    output.push([name, value, "ml"]);
   });
   return output;
 };
 // possibly improve this by populating an empty array instead of messing with an existing one
 
-// next step put all measures in a standardized unit
-convertMeasures(correlatedIngredients, 1, 2);
 // success!  all ingredients converted to mL.  This is not perfectly accurate but will serve to build a reasonable shopping list!
 // console.log(correlatedIngredients);
 
@@ -234,3 +211,24 @@ export const ingredientTracker = (recipeList) => {
   }
   return shoppingList;
 };
+
+export const recipeToIngredients = (recipe) => {
+  const entries = Object.entries(recipe);
+  const ingredients = mapNonEmpty(entries, ingredientMatch);
+  const measures = mapNonEmpty(entries, measurementMatch);
+  const measureAndUnit = separateUnits(measures, letterMatch);
+  const fractionFree = convertFraction(measureAndUnit);
+  const matchIngredMeas = correlate(ingredients, fractionFree);
+  const standardizedMeas = convertMeasures(matchIngredMeas, 1, 2);
+  return standardizedMeas;
+};
+
+export const allSelectedIngredients = (meals) => {
+  let output = [];
+  meals.forEach((meal) => {
+    output.push(recipeToIngredients(meal));
+  });
+  return output;
+};
+
+// console.log(something(pair));
