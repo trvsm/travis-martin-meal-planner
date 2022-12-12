@@ -1,6 +1,13 @@
+import axios from "axios";
+const SPOONACULAR_KEY = process.env.REACT_APP_SPOONACULAR_KEY;
 // setup regular expressions for matching object fields and measurement terms
 export const ingredientMatch = /ingredient/i;
 export const measurementMatch = /measure/i;
+
+const matchManyUnits = new RegExp(
+  "^(?:pinch|^[lp][bo]|cup|t[ab][bls]|t[es][ap]|m[il]|g(?:ram)?(?!r)(?!e)|o[uz])",
+  'gi'
+);
 
 // match any letters to separate unit from quantity
 const letterMatch = /[a-z]/i;
@@ -104,6 +111,9 @@ const convertFraction = (inputArray) => {
   let value;
   inputArray.forEach((element) => {
     let quantity = element[0];
+    if (quantity.match(/\u00BD/gi)) {
+      value = 0.5;
+    }
     if (quantity.match(/[/]/g)) {
       let execOutput = /[/]/g.exec(quantity);
       let leadingInteger;
@@ -141,7 +151,30 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
     let value;
     if (unit === "") {
       // discrete quantity; call spoonacular for a conversion using ingredient name
-
+      // spoonacular needs id to get ingredient details; two api calls
+      // axios
+      //   .get(
+      //     `https://api.spoonacular.com/food/ingredients/search?apiKey=470f89a3fadd469b996a2f6b32154e1b&query=${name}`
+      //   )
+      //   .then((response) => {
+      //     let targetId = response.data.results[0].id;
+      //     return targetId;
+      //   })
+      //   .then((targetId) => {
+      //     setTimeout(() => {
+      //       // with id call spoonacular for item data
+      //       axios
+      //         .get(
+      //           `https://api.spoonacular.com/food/ingredients/${targetId}/information?apiKey=470f89a3fadd469b996a2f6b32154e1b`
+      //         )
+      //         .then((response) => {
+      //           let quantityPerServing =
+      //             response.data.nutrition;
+      //           console.log(response.data);
+      //           console.log(response.data.nutrition);
+      //         });
+      //     }, 1000);
+      //   });
       return console.log(`call Spoonacular for ${name}`);
     }
     if (unit.match(/pinch/i)) {
@@ -149,7 +182,7 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
       output.push([name, value, "ml"]);
       return output;
     }
-    if (unit.match(/[lp][bo]/gi)) {
+    if (unit.match(/^[lp][bo]/gi)) {
       value = quantity * 454;
       output.push([name, value, "ml"]);
       return output;
@@ -171,15 +204,21 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
       output.push([name, value, "ml"]);
       return output;
     }
-    if (unit.match(/g(?:ram)?(?!r)/gi) || unit.match(/m[il]/gi)) {
-      // expression to match g, gram, grams, ml, mil, millilitres
+    if (unit.match(/m[il]/gi)) {
+      // expression to match ml, mil, millilitres
       value = quantity;
       output.push([name, value, "ml"]);
       return output;
     }
-    if (unit.match(/o[uz]/ig)) {
-      // expression to match g, gram, grams, ml, mil, millilitres
-      value = quantity*30;
+    if (unit.match(/g(?:ram)?(?!r)(?!e)/gi)) {
+      // expression to match g, gram, grams
+      value = quantity;
+      output.push([name, value, "ml"]);
+      return output;
+    }
+    if (unit.match(/o[uz]/gi)) {
+      // expression to match oz, ounce, ounces
+      value = quantity * 30;
       output.push([name, value, "ml"]);
       return output;
     } else {
