@@ -1,0 +1,11 @@
+.meals{
+    &__form{height: 40vh;
+    overflow-y: hidden;}
+    &__list{
+        display: flex;
+        flex-direction: column;
+        height: 30vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}

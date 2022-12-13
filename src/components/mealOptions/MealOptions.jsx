@@ -1,7 +1,12 @@
+import './mealOptions.scss'
 export default function MealOptions({ props, submitHandler, clickHandler }) {
+  /* Meal Options component:
+  checklist showing recipe titles from recipes state
+  On Submit checked recipes are set to selected state, selected recipes filtered from list 
+  */
   return (
-    // make this a form, pass submit handler from above
-    <form onSubmit={submitHandler}>
+   
+    <form className="meals__form" onSubmit={submitHandler}>
       <fieldset className="meals__list">
         {Object.keys(props).length > 0 ? (
           props.map((recipe) => (

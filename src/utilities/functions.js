@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 const SPOONACULAR_KEY = process.env.REACT_APP_SPOONACULAR_KEY;
 // setup regular expressions for matching object fields and measurement terms
 export const ingredientMatch = /ingredient/i;

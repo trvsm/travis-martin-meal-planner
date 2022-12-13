@@ -1,10 +1,12 @@
 // importing a named export requires destructuring
+import { useEffect } from "react";
 import { useState } from "react";
 import {
   mapNonEmpty,
   ingredientMatch,
   measurementMatch,
 } from "../../utilities/functions";
+import RecipeIngredients from "../recipeIngredients/RecipeIngredients";
 
 export default function Recipe({ props }) {
   let entries = Object.entries(props[0]);
@@ -13,14 +15,21 @@ export default function Recipe({ props }) {
   let ingredientEntry = () => {
     let items = [];
     for (let index = 0; index < ingredients.length; index++) {
-      items.push(`${ingredients[index]}, ${measures[index]} `);
+      let item = [];
+      item[0] = ingredients[index];
+      item[1] = measures[index];
+      items.push(item);
     }
     return items;
   };
-  let array = ingredientEntry();
-  const linkedIngredients = useState(array);
+  useEffect(() => {
+    setLinkedIngredients(ingredientEntry());
+  }, [props]);
+  // let array = ingredientEntry();
+  const [linkedIngredients, setLinkedIngredients] = useState();
 
-  return (<>
+  return (
+    <>
       {Object.keys(props).length > 0 ? (
         <>
           <h3 className="recipe__title">{props[0].strMeal}</h3>
@@ -36,20 +45,11 @@ export default function Recipe({ props }) {
           </div>
           <h5 className="recipe__label">instructions:</h5>
           <p className="recipe__description">{props[0].strInstructions}</p>
-          <ul className="recipe__recipe-ingredients">
-            Ingredients
-            {linkedIngredients ? (
-              linkedIngredients.map((ingredient, index) => (
-                <li key={`${ingredient}${index}`}>{ingredient}</li>
-              ))
-            ) : (
-              <li>loading...</li>
-              )}
-          </ul>
+          <RecipeIngredients props={linkedIngredients} />
         </>
       ) : (
         <p>loading...</p>
       )}
-        </>
+    </>
   );
 }
