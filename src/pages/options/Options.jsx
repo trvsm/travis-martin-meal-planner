@@ -14,6 +14,9 @@ export default function Options({
   submitHandler,
 }) {
   return (
+    /* meal planning page for user.  Handles state passed from App
+    props drilling to pass props to each appropriate component
+    */
     <>
       <div className="options__wrapper">
         <div className="options__left">

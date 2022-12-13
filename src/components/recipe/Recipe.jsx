@@ -9,6 +9,11 @@ import {
 import RecipeIngredients from "../recipeIngredients/RecipeIngredients";
 
 export default function Recipe({ props }) {
+  /* Render recipe details
+  Call helper functions to extract ingredient & measure from active recipe
+  Set correlated ingredients & measures to an array in state
+  pass linkedIngredients as prop so RecipeIngredients can render a concise list
+  */
   let entries = Object.entries(props[0]);
   let ingredients = mapNonEmpty(entries, ingredientMatch);
   let measures = mapNonEmpty(entries, measurementMatch);
@@ -25,7 +30,7 @@ export default function Recipe({ props }) {
   useEffect(() => {
     setLinkedIngredients(ingredientEntry());
   }, [props]);
-  // let array = ingredientEntry();
+
   const [linkedIngredients, setLinkedIngredients] = useState();
 
   return (

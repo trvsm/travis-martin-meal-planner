@@ -8,8 +8,12 @@ import {
 } from "../../utilities/functions";
 
 export default function List({ selected }) {
-  // list will get passed a bunch of arrays, sum them then map through all ingredients
-  // replace meals with props received
+  /* Key feature of Meal Planner:
+-uses helper functions to run computations on each selected recipe, output ingredient & measure
+-check through all ingredients and sum any with the same ingredient name
+*/
+  // TODO: add field to toggle unit
+  // TODO: add modal to support manual resolution of unformatted ingredients
   let justIngredients = allSelectedIngredients(selected);
   let computed = ingredientTracker(justIngredients);
 

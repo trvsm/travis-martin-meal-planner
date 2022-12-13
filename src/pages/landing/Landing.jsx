@@ -3,6 +3,7 @@ import "./landing.scss";
 import { Link } from "react-router-dom";
 
 export default function Landing() {
+  // simple landing page to help user understand what to expect
   return (
     <div className="landing__wrapper">
       <h1 className="landing__title">Meal Planner</h1>
@@ -11,7 +12,7 @@ export default function Landing() {
       </h3>
       <Link to={"/meals"}>
         <div className="landing__start">
-          Start planning with pre-selected recipes {'>'}
+          Start planning with pre-selected recipes {">"}
         </div>
       </Link>
       {/* <form action="" className="landing__search">
