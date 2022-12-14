@@ -1,10 +1,23 @@
+@use "../../styles/partials/colours" as *;
+@use "../../styles/partials/mixins" as mx;
+
+
 html {
   height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
 }
-:visited {
-  color: #fffae3;
+.landing {
+  &__wrapper {
+    @include mx.container;
+  }
+  &__text{
+    @include mx.inset;
+    margin-bottom: 1rem;
+  }
+  &__start{
+    @include mx.hover;
+    @include mx.link;
+  }
 }

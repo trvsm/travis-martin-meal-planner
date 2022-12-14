@@ -1,11 +1,44 @@
-.meals{
-    &__form{height: 40vh;
-    overflow-y: hidden;}
-    &__list{
-        display: flex;
-        flex-direction: column;
-        height: 30vh;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
+@use "../../styles/partials/mixins" as mx;
+@use  '../../styles/partials/colours' as *;
+@use '../../styles/partials/reset';
+
+.meals {
+  &__form {
+    height: 33vh;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    height: 27vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    @include mx.inset;
+    border: none;
+  }
+  &__button {
+    border: none;
+    width: 12rem;
+    @include mx.link;
+    @include mx.hover;
+  }
+&__label{
+    display: flex;
+}
+&__text{
+    flex-grow: 1;
+    border-radius: 0.5rem;
+    padding-left: .5rem;
+    margin: 0.25rem;
+}
+
+}
+
+:checked + div{
+    background-color: $selected;
+    font-weight: bold;
 }

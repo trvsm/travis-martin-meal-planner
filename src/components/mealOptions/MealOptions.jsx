@@ -9,25 +9,28 @@ export default function MealOptions({ props, submitHandler, clickHandler }) {
       <fieldset className="meals__list">
         {Object.keys(props).length > 0 ? (
           props.map((recipe) => (
-            <label
-              htmlFor={recipe.idMeal}
-              onClick={clickHandler}
-              key={recipe.idMeal}
-            >
-              {recipe.strMeal}
-              <input
-                type="checkbox"
-                id={recipe.idMeal}
-                className="meals__item"
-                name={recipe.strMeal}
-              ></input>
-            </label>
+            <>
+              <label
+                className="meals__label"
+                htmlFor={recipe.idMeal}
+                onClick={clickHandler}
+                key={recipe.idMeal}
+              >
+                <input
+                  className="meals__checkbox"
+                  type="checkbox"
+                  id={recipe.idMeal}
+                  name={recipe.strMeal}
+                ></input>
+                <div className="meals__text">{recipe.strMeal}</div>
+              </label>
+            </>
           ))
         ) : (
           <label>loading...</label>
         )}
       </fieldset>
-      <button>add to selection</button>
+      <button className="meals__button">add to selection</button>
     </form>
   );
 }

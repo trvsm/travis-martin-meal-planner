@@ -1,8 +1,6 @@
-@use "./styles/partials/colours" as *;
-@use "./styles/partials/mixins" as mx;
-html {
-  background-color: $primary-background;
-}
+@use "../partials/colours" as *;
+@use "../partials/mixins" as mx;
+
 *,
 html,
 body {
@@ -24,6 +22,9 @@ a {
 :visited {
   color: $primary-text;
 }
+:checked + label{
+    background-color: $primary-inset;
+}
 
 ::-webkit-scrollbar-thumb {
   border-radius: 0.5rem;
@@ -31,22 +32,3 @@ a {
 ::-webkit-scrollbar-button {
   display: none;
 }
-
-/* Coolors palette* With #
-
-oxford blue 
-#000025
-
-persian plum 
-#6f1d1b
-
-army green
- #474b24
- 
- Orange Pantone
- #f75c03
- 
- Cornsilk
- #fffae3
-
-*/

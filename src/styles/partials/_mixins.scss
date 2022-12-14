@@ -1,0 +1,29 @@
+@use "../partials/colours" as *;
+@mixin container {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0.5rem 0.5rem 0.5rem black;
+  background-color: $primary-container;
+}
+
+@mixin hover {
+    cursor: pointer;
+  &:hover {
+    background-color: $hover;
+    transition: 0.3s;
+  }
+}
+
+@mixin inset {
+  color: $primary-text;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: $primary-inset;
+}
+
+@mixin link {
+    border-radius: 0.5rem;
+    background-color: $primary-inset;
+    padding: .5rem;
+    
+}
