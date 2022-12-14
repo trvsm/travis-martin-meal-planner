@@ -41,12 +41,24 @@ export default function Options({
 
           {/* list of user selected meals */}
           <section className="options__selected">
+            <div className="options__top">
+
             <h3 className="options__selected-title">Selected Meals</h3>
             {/* will map through options to generate this list */}
             {Object.keys(selected).length > 0 ? (
               <SelectedMeals props={selected} clickHandler={clickHandler} />
+              ) : (
+                <p>please select meal options from above</p>
+                )}
+                </div>
+            {selected.length > 0 ? (
+              <Link to={"/list"}>
+                <div className="options__link">Get Your Shopping List {">"}</div>
+              </Link>
             ) : (
-              <p>please select meal options from above</p>
+              <div className="options__link">
+                Select meal options, then generate a shopping list!
+              </div>
             )}
           </section>
         </div>
@@ -64,15 +76,6 @@ export default function Options({
               </>
             )}
           </article>
-          {selected.length > 0 ? (
-            <Link to={"/list"}>
-              <div className="options__link">Get Your Shopping List {">"}</div>
-            </Link>
-          ) : (
-            <div className="options__link">
-              Select meal options, then generate a shopping list!
-            </div>
-          )}
         </section>
       </div>
     </>

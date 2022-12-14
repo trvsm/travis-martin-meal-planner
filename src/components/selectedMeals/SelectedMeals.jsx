@@ -3,7 +3,7 @@ export default function SelectedMeals({ props, clickHandler }) {
   return (
     // Similar component to MealOptions: when selected recipes set to state display recipe titles
     // button clears state
-    <form className='meals__form'>
+    <form className='meals__form--selected'>
       <fieldset className="meals__list">
         {Object.keys(props).length > 0 ? (
           props.map((recipe) => (
@@ -15,7 +15,7 @@ export default function SelectedMeals({ props, clickHandler }) {
                 key={recipe.idMeal}
               >
                 <input
-                  className="meals__checkbox"
+                  className="meals__checkbox--selected"
                   type="checkbox"
                   id={recipe.idMeal}
                   name={recipe.strMeal}
@@ -28,7 +28,7 @@ export default function SelectedMeals({ props, clickHandler }) {
           <label>loading...</label>
         )}
       </fieldset>
-      <button className="meals__button">remove all</button>
+  
     </form>
   );
 }

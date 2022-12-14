@@ -25,6 +25,11 @@
   &__meals {
     margin-bottom: 1rem;
   }
+  &__selected{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   &__meals-title,
   &__selected-title {
     padding-bottom: 1rem;
@@ -44,11 +49,10 @@
     justify-content: space-between;
   }
   &__recipe {
-    height: 78vh;
+    height: 82vh;
     overflow-x: hidden;
     overflow-y: auto;
     @include mx.inset;
-    margin-bottom: 1rem;
   }
   &__link {
     display: flex;

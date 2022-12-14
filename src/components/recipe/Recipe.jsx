@@ -7,6 +7,7 @@ import {
   measurementMatch,
 } from "../../utilities/functions";
 import RecipeIngredients from "../recipeIngredients/RecipeIngredients";
+import './recipe.scss';
 
 export default function Recipe({ props }) {
   /* Render recipe details
