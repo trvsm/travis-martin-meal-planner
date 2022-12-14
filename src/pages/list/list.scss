@@ -1,0 +1,18 @@
+body{margin: 0;
+overflow: hidden;}
+.list{display: flex;
+    justify-content: flex-end;
+    height: 98vh;
+    &__wrapper{
+        padding: 1rem;
+
+    }
+    &__output{
+        height: 88vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    &__title{
+        margin: 0;
+    }
+}
