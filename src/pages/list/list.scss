@@ -1,31 +1,42 @@
-@use '../../styles/partials/mixins' as mx;
+@use "../../styles/partials/mixins" as mx;
 
 .list {
   display: flex;
   justify-content: flex-end;
   height: 98vh;
-  &__empty{
+  &__title{
+    padding-bottom: 1rem;
+  }
+  &__empty {
     @include mx.container;
     width: 32.5rem;
   }
-  &__message{
+  &__message {
     @include mx.inset;
     margin-bottom: 1rem;
   }
-  &__restart{
+  &__restart {
     @include mx.link;
     @include mx.hover;
   }
   &__wrapper {
-    padding: 1rem;
-    
+    height: 94vh;
+    @include mx.container;
   }
   &__output {
-    height: 88vh;
+    height: 79vh;
     overflow-y: auto;
     overflow-x: hidden;
+    @include mx.inset;
+    margin-bottom: 1rem;
+    list-style-type: circle;
+    list-style-position: inside;
   }
-  &__title {
-    margin: 0;
+  &__item {
+    &::marker {
+      font-size: 1.5rem;
+      margin-right: 0;
+      padding-left: 1rem;
+    }
   }
 }

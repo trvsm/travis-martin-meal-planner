@@ -36,7 +36,9 @@ export default function List({ selected }) {
         </div>
       ) : (
         <div className="list__empty">
-          <h1 className="list__message">Please follow the promts and select recipes to build a list!</h1>
+          <h1 className="list__message">
+            Please follow the promts and select recipes to build a list!
+          </h1>
           <Link to={"/"}>
             <div className="list__restart">Start Over {">"}</div>
           </Link>
