@@ -50,6 +50,10 @@ function App() {
       recipes.filter((recipe) => checked.indexOf(recipe.idMeal) !== -1)
     );
   };
+  const buttonHandler = () => {
+    setFiltered(recipes);
+    setSelected([]);
+  };
   return (
     <BrowserRouter>
       <Routes>
@@ -58,16 +62,17 @@ function App() {
           path="/meals"
           element={
             <Options
-            filtered={filtered}
-            selected={selected}
-            activeRecipe={activeRecipe}
+              filtered={filtered}
+              selected={selected}
+              activeRecipe={activeRecipe}
               recipes={recipes}
               clickHandler={clickHandler}
               submitHandler={submitHandler}
+              buttonHandler={buttonHandler}
             />
           }
         />
-        <Route path="/list" element={<List selected={selected}/>} />
+        <Route path="/list" element={<List selected={selected} />} />
       </Routes>
     </BrowserRouter>
   );

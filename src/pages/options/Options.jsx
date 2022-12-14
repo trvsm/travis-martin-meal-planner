@@ -12,6 +12,7 @@ export default function Options({
   activeRecipe,
   clickHandler,
   submitHandler,
+  buttonHandler
 }) {
   return (
     /* meal planning page for user.  Handles state passed from App
@@ -29,12 +30,14 @@ export default function Options({
                 props={filtered}
                 clickHandler={clickHandler}
                 submitHandler={submitHandler}
+                buttonHandler={buttonHandler}
               />
             ) : (
               <MealOptions
                 props={recipes}
                 clickHandler={clickHandler}
                 submitHandler={submitHandler}
+                buttonHandler={buttonHandler}
               />
             )}
           </section>
@@ -42,18 +45,19 @@ export default function Options({
           {/* list of user selected meals */}
           <section className="options__selected">
             <div className="options__top">
-
-            <h3 className="options__selected-title">Selected Meals</h3>
-            {/* will map through options to generate this list */}
-            {Object.keys(selected).length > 0 ? (
-              <SelectedMeals props={selected} clickHandler={clickHandler} />
+              <h3 className="options__selected-title">Selected Meals</h3>
+              {/* will map through options to generate this list */}
+              {Object.keys(selected).length > 0 ? (
+                <SelectedMeals props={selected} clickHandler={clickHandler} />
               ) : (
                 <p>please select meal options from above</p>
-                )}
-                </div>
+              )}
+            </div>
             {selected.length > 0 ? (
               <Link to={"/list"}>
-                <div className="options__link">Get Your Shopping List {">"}</div>
+                <div className="options__link">
+                  Get Your Shopping List {">"}
+                </div>
               </Link>
             ) : (
               <div className="options__link">

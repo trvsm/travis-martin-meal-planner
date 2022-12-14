@@ -20,11 +20,15 @@
     @include mx.inset;
     border: none;
   }
-  &__button {
+  &__button,&__reset{
     border: none;
-    width: 12rem;
+    width: 16rem;
     @include mx.link;
     @include mx.hover;
+  }
+  &__buttons{
+    display: flex;
+    justify-content: space-between;
   }
 &__label{
     display: flex;
