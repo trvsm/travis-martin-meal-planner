@@ -1,18 +1,31 @@
-body{margin: 0;
-overflow: hidden;}
-.list{display: flex;
-    justify-content: flex-end;
-    height: 98vh;
-    &__wrapper{
-        padding: 1rem;
+@use '../../styles/partials/mixins' as mx;
 
-    }
-    &__output{
-        height: 88vh;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-    &__title{
-        margin: 0;
-    }
+.list {
+  display: flex;
+  justify-content: flex-end;
+  height: 98vh;
+  &__empty{
+    @include mx.container;
+    width: 32.5rem;
+  }
+  &__message{
+    @include mx.inset;
+    margin-bottom: 1rem;
+  }
+  &__restart{
+    @include mx.link;
+    @include mx.hover;
+  }
+  &__wrapper {
+    padding: 1rem;
+    
+  }
+  &__output {
+    height: 88vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  &__title {
+    margin: 0;
+  }
 }

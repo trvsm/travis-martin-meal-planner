@@ -17,7 +17,7 @@ export default function List({ selected }) {
   let justIngredients = allSelectedIngredients(selected);
   let computed = ingredientTracker(justIngredients);
 
-  let [shoppingItem,] = useState(computed);
+  let [shoppingItem] = useState(computed);
   return (
     <>
       {Object.keys(shoppingItem).length > 0 ? (
@@ -35,12 +35,12 @@ export default function List({ selected }) {
           </Link>
         </div>
       ) : (
-        <>
-          <h1>Please follow the promts and select recipes to build a list!</h1>
+        <div className="list__empty">
+          <h1 className="list__message">Please follow the promts and select recipes to build a list!</h1>
           <Link to={"/"}>
             <div className="list__restart">Start Over {">"}</div>
           </Link>
-        </>
+        </div>
       )}
     </>
   );
