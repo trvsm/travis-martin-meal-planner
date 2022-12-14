@@ -5,15 +5,15 @@
 - patterns to match & filter string data
 */
 // import axios from "axios";
-const SPOONACULAR_KEY = process.env.REACT_APP_SPOONACULAR_KEY;
+// const SPOONACULAR_KEY = process.env.REACT_APP_SPOONACULAR_KEY;
 // setup regular expressions for matching object fields and measurement terms
 export const ingredientMatch = /ingredient/i;
 export const measurementMatch = /measure/i;
 
-const matchManyUnits = new RegExp(
-  "^(?:pinch|^[lp][bo]|cup|t[ab][bls]|t[es][ap]|m[il]|g(?:ram)?(?!r)(?!e)|o[uz])",
-  "gi"
-);
+// const matchManyUnits = new RegExp(
+//   "^(?:pinch|^[lp][bo]|cup|t[ab][bls]|t[es][ap]|m[il]|g(?:ram)?(?!r)(?!e)|o[uz])",
+//   "gi"
+// );
 
 // match any letters to separate unit from quantity
 const letterMatch = /[a-z]/i;

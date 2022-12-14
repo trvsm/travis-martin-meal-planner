@@ -29,7 +29,7 @@ export default function Recipe({ props }) {
   };
   useEffect(() => {
     setLinkedIngredients(ingredientEntry());
-  }, [props, ingredientEntry]);
+  },[props]);
 
   const [linkedIngredients, setLinkedIngredients] = useState();
 
