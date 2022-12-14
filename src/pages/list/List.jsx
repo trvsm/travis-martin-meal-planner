@@ -17,7 +17,7 @@ export default function List({ selected }) {
   let justIngredients = allSelectedIngredients(selected);
   let computed = ingredientTracker(justIngredients);
 
-  let [shoppingItem, _setShoppingItem] = useState(computed);
+  let [shoppingItem,] = useState(computed);
   return (
     <>
       {Object.keys(shoppingItem).length > 0 ? (

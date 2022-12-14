@@ -9,12 +9,11 @@ export default function MealOptions({ props, submitHandler, clickHandler }) {
       <fieldset className="meals__list">
         {Object.keys(props).length > 0 ? (
           props.map((recipe) => (
-            <>
+            <div key={recipe.idMeal}>
               <label
                 className="meals__label"
                 htmlFor={recipe.idMeal}
                 onClick={clickHandler}
-                key={recipe.idMeal}
               >
                 <input
                   className="meals__checkbox"
@@ -24,7 +23,7 @@ export default function MealOptions({ props, submitHandler, clickHandler }) {
                 ></input>
                 <div className="meals__text">{recipe.strMeal}</div>
               </label>
-            </>
+            </div>
           ))
         ) : (
           <label>loading...</label>
