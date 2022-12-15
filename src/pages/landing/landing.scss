@@ -6,7 +6,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(-45deg, #fefae0, #d4a373, #e9edc9);
+  background: linear-gradient(-45deg, $primary-background, $primary-inset, $hover, $selected);
   background-size: 200% 200%;
   animation-name: bgscroll;
   animation-duration: 25s;
