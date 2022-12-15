@@ -17,8 +17,8 @@
     height: 27vh;
     overflow-x: hidden;
     overflow-y: auto;
-    @include mx.inset;
     border: none;
+    @include mx.inset;
   }
   &__button,&__reset{
     border: none;

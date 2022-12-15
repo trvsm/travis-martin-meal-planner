@@ -4,10 +4,11 @@
   border-radius: 0.5rem;
   box-shadow: 0.5rem 0.5rem 0.5rem black;
   background-color: $primary-container;
+  border: 1px solid $divider;
 }
 
 @mixin hover {
-    cursor: pointer;
+  cursor: pointer;
   &:hover {
     background-color: $hover;
     transition: 0.3s;
@@ -19,23 +20,24 @@
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: $primary-inset;
+  border: 1px solid $divider;
 }
 
 @mixin link {
-    border-radius: 0.5rem;
-    background-color: $primary-inset;
-    padding: .5rem;
-    
+  border-radius: 0.5rem;
+  background-color: $primary-inset;
+  padding: 0.5rem;
+  border: 1px solid $divider;
 }
 
-@mixin dropdown{
-    border: none;
-    padding: 0.125rem;
-    margin: 0.25rem;
-    border-radius: 0.5rem;
-    background-color: $hover;
-    &:focus-visible{
-        outline: none;
-        background-color: $primary-container;
-    }
+@mixin dropdown {
+  border: none;
+  padding: 0.125rem;
+  margin: 0.25rem;
+  border-radius: 0.5rem;
+  background-color: $hover;
+  &:focus-visible {
+    outline: none;
+    background-color: $primary-container;
+  }
 }

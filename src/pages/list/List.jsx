@@ -64,7 +64,7 @@ export default function List({ selected }) {
             {shoppingItem.map((ingredient) => (
               <li key={ingredient[0]} className="list__item">
                 <div className="list__item-contents">
-                  {ingredient[0]}: {ingredient[1]} {ingredient[2]}
+                  {ingredient[0]}
                 </div>
                 <select
                   className="list__dropdown"
