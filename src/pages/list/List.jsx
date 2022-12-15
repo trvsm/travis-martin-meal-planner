@@ -19,6 +19,8 @@ export default function List({ selected }) {
 
   const [messyIngredients, setMessyIngredients] = useState();
   const [shoppingItem] = useState(computed);
+  const [message, setMessage] = useState("");
+  const [clipList, setClipList] = useState("");
 
   const showInput = (selection) => {
     const longList = [];
@@ -36,6 +38,11 @@ export default function List({ selected }) {
     setMessyIngredients(showInput(selected));
   }, [selected]);
 
+  useEffect(() => {
+    setClipList(window.frames.document.getElementById("toPrint").innerText)
+    setMessage(encodeURIComponent(window.frames.document.getElementById("toPrint").innerText));
+  }, [shoppingItem]);
+
   return (
     <div className="wrapper">
       {messyIngredients ? (
@@ -51,7 +58,7 @@ export default function List({ selected }) {
         ""
       )}
       {Object.keys(shoppingItem).length > 0 ? (
-        <div className="list__wrapper">
+        <div className="list__wrapper" id="toPrint">
           <h2 className="list__title">To make your simple shopping list:</h2>
           <ul className="list__output">
             {shoppingItem.map((ingredient) => (
@@ -65,24 +72,52 @@ export default function List({ selected }) {
                   defaultValue={1}
                 >
                   <option value={1} className="list__option">
-                   {ingredient[1].toFixed(1)} ml
+                    {ingredient[1].toFixed(1)} ml
                   </option>
                   <option value={1} className="list__option">
-                   {ingredient[1].toFixed(1)} g
+                    {ingredient[1].toFixed(1)} g
                   </option>
-                  <option value={1/30} className="list__option">
-                   {(ingredient[1]/30).toFixed(2)} oz
+                  <option value={1 / 30} className="list__option">
+                    {(ingredient[1] / 30).toFixed(2)} oz
                   </option>
                   <option value={0.002205} className="list__option">
-                   {(ingredient[1]/454).toFixed(2)} lb
+                    {(ingredient[1] / 454).toFixed(2)} lb
                   </option>
                 </select>
               </li>
             ))}
           </ul>
-          <Link to={"/"}>
-            <div className="list__restart">Start Over {">"}</div>
-          </Link>
+          <div className="list__buttons">
+            <button
+              className="list__copy"
+              onClick={() => {
+                debugger;
+                const type = "text/plain";
+                const list = clipList;
+                const blob = new Blob([list], { type });
+                const data = [new ClipboardItem({ [type]: blob })];
+                navigator.clipboard.write(data).then(
+                  () => {
+                    console.log("copied to clipboard");
+                  },
+                  () => {
+                    console.log("error");
+                  }
+                );
+              }}
+            >
+              Copy to Clipboard
+            </button>
+            <a
+              className="list__email"
+              href={`mailto:your@email.com?subject=Groceries&body=${message}`}
+            >
+              Email list
+            </a>
+            <Link to={"/"}>
+              <div className="list__restart">Start Over {">"}</div>
+            </Link>
+          </div>
         </div>
       ) : (
         <div className="list__empty">

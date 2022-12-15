@@ -37,9 +37,15 @@
     @include mx.inset;
     margin-bottom: 1rem;
   }
-  &__restart {
+  &__buttons{
+    display: flex;
+    justify-content: space-between;
+  }
+  &__restart,&__copy, &__email {
     @include mx.link;
     @include mx.hover;
+    width: 10rem;
+    text-align: center;
   }
   &__wrapper {
     height: 94vh;
@@ -71,4 +77,22 @@
     @include mx.dropdown;
     width: 10rem;
   }
+  &__copy{
+    border: none;
+    text-decoration: underline;
+    font-size: 1rem;
+  }
+}
+@media print{
+    body *{
+        visibility: hidden;
+    }
+    #print, #print *{
+        visibility: visible;
+    }
+    #print{
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
 }

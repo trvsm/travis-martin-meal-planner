@@ -287,5 +287,3 @@ export const allSelectedIngredients = (meals) => {
   });
   return output;
 };
-
-// console.log(something(pair));
