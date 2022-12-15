@@ -27,3 +27,15 @@
     padding: .5rem;
     
 }
+
+@mixin dropdown{
+    border: none;
+    padding: 0.125rem;
+    margin: 0.25rem;
+    border-radius: 0.5rem;
+    background-color: $hover;
+    &:focus-visible{
+        outline: none;
+        background-color: $primary-container;
+    }
+}

@@ -25,10 +25,3 @@ a {
 :checked + label{
     background-color: $primary-inset;
 }
-
-::-webkit-scrollbar-thumb {
-  border-radius: 0.5rem;
-}
-::-webkit-scrollbar-button {
-  display: none;
-}

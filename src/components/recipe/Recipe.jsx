@@ -15,13 +15,13 @@ export default function Recipe({ props }) {
   Set correlated ingredients & measures to an array in state
   pass linkedIngredients as prop so RecipeIngredients can render a concise list
   */
-  let entries = Object.entries(props[0]);
-  let ingredients = mapNonEmpty(entries, ingredientMatch);
-  let measures = mapNonEmpty(entries, measurementMatch);
-  let ingredientEntry = () => {
-    let items = [];
+  const entries = Object.entries(props[0]);
+  const ingredients = mapNonEmpty(entries, ingredientMatch);
+  const measures = mapNonEmpty(entries, measurementMatch);
+  const ingredientEntry = () => {
+    const items = [];
     for (let index = 0; index < ingredients.length; index++) {
-      let item = [];
+      const item = [];
       item[0] = ingredients[index];
       item[1] = measures[index];
       items.push(item);

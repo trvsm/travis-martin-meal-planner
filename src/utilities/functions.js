@@ -62,10 +62,10 @@ export const mapNonEmpty = (inputArray, targetKey) => {
  * @param {RegExp} matchExpression: a regular expression to determine where to separate field; often will match on /[a-z]/ to separate units with english letter names
  */
 const separateUnits = (valuePlusUnit, matchExpression) => {
-  let output = [];
+  const output = [];
   valuePlusUnit.forEach((element, index) => {
     // exec method returns an object including index of match
-    let execOutput = matchExpression.exec(element);
+    const execOutput = matchExpression.exec(element);
     // slice from start of string to index to return number. May include fractions eg 3/4.  will compute fraction to number later
 
     let value;
@@ -101,7 +101,7 @@ const separateUnits = (valuePlusUnit, matchExpression) => {
  */
 
 const correlate = (nameArray, valueArray) => {
-  let output = [];
+  const output = [];
   for (let i = 0; i < nameArray.length; i++) {
     // if value array is empty here set value to one eg: cinnamon stick
     if (!valueArray[i]) {
@@ -113,7 +113,7 @@ const correlate = (nameArray, valueArray) => {
   return output;
 };
 const convertFraction = (inputArray) => {
-  let output = [];
+  const output = [];
   let value;
   inputArray.forEach((element) => {
     let quantity = element[0];
@@ -149,9 +149,9 @@ const convertFraction = (inputArray) => {
 // this function takes an array with a number of non-standardized food measurements and converts as many as possible to mL
 // cases more specific to more general: kg then g, tbsp then tsp
 const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
-  let output = [];
+  const output = [];
   arrayWithMeasures.forEach((element) => {
-    let name = element[0];
+    const name = element[0];
     const quantity = element[indexOfValue];
     const unit = element[indexOfUnit];
     let value;
@@ -245,7 +245,7 @@ export const ingredientTracker = (recipeList) => {
     ingredients.forEach(
       //comparison: an ingredient in a recipe
       (ingredient) => {
-        let currentList = [];
+        const currentList = [];
         // add each ingredient name in output to new array to check against
         shoppingList.forEach((element) => {
           currentList.push(element[0]);
@@ -281,7 +281,7 @@ export const recipeToIngredients = (recipe) => {
 };
 
 export const allSelectedIngredients = (meals) => {
-  let output = [];
+  const output = [];
   meals.forEach((meal) => {
     output.push(recipeToIngredients(meal));
   });

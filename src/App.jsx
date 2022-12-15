@@ -37,7 +37,7 @@ function App() {
   const submitHandler = (event) => {
     event.preventDefault();
     // array to hold ids of checked recipes
-    let checked = [];
+    const checked = [];
     for (let index = 1; index < event.target.length; index++) {
       if (event.target[index].checked) {
         checked.push(event.target[index].id);
