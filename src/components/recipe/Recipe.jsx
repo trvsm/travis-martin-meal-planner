@@ -39,17 +39,18 @@ export default function Recipe({ props }) {
       {Object.keys(props).length > 0 ? (
         <>
           <h3 className="recipe__title">{props[0].strMeal}</h3>
-          <h5 className="recipe__label">source:</h5>
+          <img className="recipe__pic" src={props[0].strMealThumb} alt={`picture of ${props[0].strMeal}`}/>
+          <h5 className="recipe__label">Source:</h5>
           <a href={props[0].strSource} className="recipe__source">
             {props[0].strSource}
           </a>
           <div className="recipe__specs">
-            <h5 className="recipe__label">cuisine:</h5>
+            <h5 className="recipe__label">Cuisine:</h5>
             <p className="recipe__cuisine">{props[0].strArea}</p>
-            <h5 className="recipe__label">category:</h5>
+            <h5 className="recipe__label">Category:</h5>
             <p className="recipe__category">{props[0].strCategory}</p>
           </div>
-          <h5 className="recipe__label">instructions:</h5>
+          <h5 className="recipe__label">Instructions:</h5>
           <p className="recipe__description">{props[0].strInstructions}</p>
           <RecipeIngredients props={linkedIngredients} />
         </>

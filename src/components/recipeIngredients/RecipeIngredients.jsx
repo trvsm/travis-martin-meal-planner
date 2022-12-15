@@ -4,7 +4,9 @@ export default function RecipeIngredients({ props }) {
   return (
     <>
       <ul className="recipe__recipe-ingredients">
-        Ingredients:
+        <h5 className='recipe__ingredients-title'>
+          Ingredients:
+          </h5>
         {props ? (
           props.map((ingredient, index) => (
             <li className="recipe__ingredient" key={`${ingredient}${index}`}>{ingredient}</li>
