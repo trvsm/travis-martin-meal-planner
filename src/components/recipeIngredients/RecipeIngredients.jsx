@@ -9,7 +9,7 @@ export default function RecipeIngredients({ props }) {
           </h5>
         {props ? (
           props.map((ingredient, index) => (
-            <li className="recipe__ingredient" key={`${ingredient}${index}`}>{ingredient}</li>
+            <li className="recipe__ingredient" key={`${ingredient}${index}`}>{`${ingredient[0]}, ${ingredient[1]}`}</li>
           ))
         ) : (
           <li>loading...</li>
