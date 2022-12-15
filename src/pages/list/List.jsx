@@ -16,10 +16,9 @@ export default function List({ selected }) {
   // TODO: add modal to support manual resolution of unformatted ingredients
   const justIngredients = allSelectedIngredients(selected);
   const computed = ingredientTracker(justIngredients);
-  
+
   const [messyIngredients, setMessyIngredients] = useState();
   const [shoppingItem] = useState(computed);
-  const [valueState, setValueState] = useState(1);
 
   const showInput = (selection) => {
     const longList = [];
@@ -58,20 +57,24 @@ export default function List({ selected }) {
             {shoppingItem.map((ingredient) => (
               <li key={ingredient[0]} className="list__item">
                 <div className="list__item-contents">
-                  {ingredient[0]}: {ingredient[1]}
+                  {ingredient[0]}: {ingredient[1]} {ingredient[2]}
                 </div>
-                <select className="list__dropdown" defaultValue={1}>
+                <select
+                  className="list__dropdown"
+                  id={ingredient[1]}
+                  defaultValue={1}
+                >
                   <option value={1} className="list__option">
-                    ml
+                   {ingredient[1].toFixed(1)} ml
                   </option>
                   <option value={1} className="list__option">
-                    g
+                   {ingredient[1].toFixed(1)} g
                   </option>
-                  <option value={30} className="list__option">
-                    oz
+                  <option value={1/30} className="list__option">
+                   {(ingredient[1]/30).toFixed(2)} oz
                   </option>
                   <option value={0.002205} className="list__option">
-                    lb
+                   {(ingredient[1]/454).toFixed(2)} lb
                   </option>
                 </select>
               </li>
