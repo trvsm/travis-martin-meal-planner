@@ -1,0 +1,27 @@
+@use "../partials/colours" as *;
+@use "../partials/mixins" as mx;
+
+*,
+html,
+body {
+  margin: 0;
+  box-sizing: border-box;
+  color: $primary-text;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  @include mx.hover;
+}
+:visited {
+  color: $primary-text;
+}
+:checked + label{
+    background-color: $primary-inset;
+}

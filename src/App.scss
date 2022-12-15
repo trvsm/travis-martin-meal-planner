@@ -1,7 +1,28 @@
+@use "./styles/partials/colours" as *;
+@use "./styles/partials/mixins" as mx;
 html {
-  background-color: darken($color: darkblue, $amount: 20);
-  color: #fffae3;
-  
+  background-color: $primary-background;
+}
+*,
+html,
+body {
+  margin: 0;
+  box-sizing: border-box;
+  color: $primary-text;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  @include mx.hover;
+}
+:visited {
+  color: $primary-text;
 }
 
 /* Coolors palette* With #

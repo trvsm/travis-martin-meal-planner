@@ -19,6 +19,7 @@ function App() {
 
   const [activeRecipe, setActiveRecipe] = useState({});
 
+
   useEffect(() => {
     // on page load get recipes.  May end up moving this state up to app if search implemented; landing will set state and pass down
     axios.get(`${BACK_END}/recipes`).then((response) => {
@@ -36,7 +37,7 @@ function App() {
   const submitHandler = (event) => {
     event.preventDefault();
     // array to hold ids of checked recipes
-    let checked = [];
+    const checked = [];
     for (let index = 1; index < event.target.length; index++) {
       if (event.target[index].checked) {
         checked.push(event.target[index].id);
@@ -50,6 +51,10 @@ function App() {
       recipes.filter((recipe) => checked.indexOf(recipe.idMeal) !== -1)
     );
   };
+  const buttonHandler = () => {
+    setFiltered(recipes);
+    setSelected([]);
+  };
   return (
     <BrowserRouter>
       <Routes>
@@ -58,16 +63,17 @@ function App() {
           path="/meals"
           element={
             <Options
-            filtered={filtered}
-            selected={selected}
-            activeRecipe={activeRecipe}
+              filtered={filtered}
+              selected={selected}
+              activeRecipe={activeRecipe}
               recipes={recipes}
               clickHandler={clickHandler}
               submitHandler={submitHandler}
+              buttonHandler={buttonHandler}
             />
           }
         />
-        <Route path="/list" element={<List selected={selected}/>} />
+        <Route path="/list" element={<List selected={selected} />} />
       </Routes>
     </BrowserRouter>
   );

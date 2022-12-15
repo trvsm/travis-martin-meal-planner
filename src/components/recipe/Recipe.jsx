@@ -1,24 +1,38 @@
 // importing a named export requires destructuring
+import { useEffect } from "react";
 import { useState } from "react";
 import {
   mapNonEmpty,
   ingredientMatch,
   measurementMatch,
 } from "../../utilities/functions";
+import RecipeIngredients from "../recipeIngredients/RecipeIngredients";
+import './recipe.scss';
 
 export default function Recipe({ props }) {
-  let entries = Object.entries(props[0]);
-  let ingredients = mapNonEmpty(entries, ingredientMatch);
-  let measures = mapNonEmpty(entries, measurementMatch);
-  let ingredientEntry = () => {
-    let items = [];
+  /* Render recipe details
+  Call helper functions to extract ingredient & measure from active recipe
+  Set correlated ingredients & measures to an array in state
+  pass linkedIngredients as prop so RecipeIngredients can render a concise list
+  */
+  const entries = Object.entries(props[0]);
+  const ingredients = mapNonEmpty(entries, ingredientMatch);
+  const measures = mapNonEmpty(entries, measurementMatch);
+  const ingredientEntry = () => {
+    const items = [];
     for (let index = 0; index < ingredients.length; index++) {
-      items.push(`${ingredients[index]}, ${measures[index]}`);
+      const item = [];
+      item[0] = ingredients[index];
+      item[1] = measures[index];
+      items.push(item);
     }
     return items;
   };
-  let array = ingredientEntry();
-  const linkedIngredients = useState(array);
+  useEffect(() => {
+    setLinkedIngredients(ingredientEntry());
+  },[props]);
+
+  const [linkedIngredients, setLinkedIngredients] = useState();
 
   return (
     <>
@@ -37,16 +51,7 @@ export default function Recipe({ props }) {
           </div>
           <h5 className="recipe__label">instructions:</h5>
           <p className="recipe__description">{props[0].strInstructions}</p>
-          <ul className="recipe__recipe-ingredients">
-            Ingredients
-            {linkedIngredients ? (
-              linkedIngredients.map((ingredient, index) => (
-                <li key={`${ingredient}${index}`}>{ingredient}</li>
-              ))
-            ) : (
-              <li>loading...</li>
-            )}
-          </ul>
+          <RecipeIngredients props={linkedIngredients} />
         </>
       ) : (
         <p>loading...</p>

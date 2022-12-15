@@ -1,10 +1,27 @@
+@use "../../styles/partials/colours" as *;
+@use "../../styles/partials/mixins" as mx;
+
+
 html {
   height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
 }
-:visited {
-  color: #fffae3;
+.landing {
+  &__wrapper {
+    @include mx.container;
+    display: flex;
+    flex-direction: column;
+    height: 11.7rem;
+  }
+  &__text{
+    @include mx.inset;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+  &__start{
+    @include mx.hover;
+    @include mx.link;
+  }
 }

@@ -1,64 +1,71 @@
-.options{
-    &__wrapper{
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-
-    &__left{
-        width: 45vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-    }
-
-    &__meals, &__selected{
-        height: 40vh;
-        background-color: darkblue;
-        border-radius: .5rem;
-        padding: 1rem;
-    }
-    &__meals-list{
-        display: flex;
-        flex-direction: column;
-    }
-
-    &__recipe-wrap{
-        width: 45vw;
-        background-color: darkblue;
-        border-radius: .5rem;
-        padding: 1rem;
-        height: 84vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    &__recipe{
-        height: 78vh;
-        overflow-x: hidden;
-        overflow-y: auto;
-        background-color: darken($color: darkblue, $amount: 10);
-        border-radius: .5rem;
-        padding: 1rem;
-        margin-bottom: 1rem;
-
-    }
-    &__link{
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        padding-right: 1rem;
-        background-color: darken($color: darkblue, $amount: 10);
-        border-radius: .5rem;
-        height: 4vh;
-        color: #fffae3;
-        &:visited{
-            color: #fffae3;
-        }
-    }
-&__specs{
+@use "../../styles/partials/mixins" as mx;
+@use "../../styles/partials/colours" as *;
+.options {
+  &__wrapper {
+    width: 100vw;
+    height: 100vh;
     display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  &__left {
+    width: 45vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  &__meals,
+  &__selected {
+    height: 41vh;
+    background-color: darkblue;
+    @include mx.container;
+  }
+  &__meals {
+    margin-bottom: 1rem;
+  }
+  &__selected{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__meals-title,
+  &__selected-title {
+    padding-bottom: 1rem;
+  }
+  &__meals-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__recipe-wrap {
+    width: 45vw;
+    background-color: darkblue;
+    @include mx.container;
+    height: 84vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__recipe {
+    height: 82vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    @include mx.inset;
+  }
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 4vh;
+    @include mx.link;
+    @include mx.hover;
+  }
+  &__specs {
+    display: flex;
+  }
 }
+a {
+  border-radius: 0.5rem;
 }

@@ -1,11 +1,22 @@
-// while populating combined list if there is a missing key populate with 1
-
+/* workhorse of the app.
+-functions to convert format of incoming data
+-functions to filter & convert measurements
+-functions to sum similar measurements
+- patterns to match & filter string data
+*/
+// import axios from "axios";
+// const SPOONACULAR_KEY = process.env.REACT_APP_SPOONACULAR_KEY;
 // setup regular expressions for matching object fields and measurement terms
 export const ingredientMatch = /ingredient/i;
 export const measurementMatch = /measure/i;
 
+// const matchManyUnits = new RegExp(
+//   "^(?:pinch|^[lp][bo]|cup|t[ab][bls]|t[es][ap]|m[il]|g(?:ram)?(?!r)(?!e)|o[uz])",
+//   "gi"
+// );
+
 // match any letters to separate unit from quantity
-const letterMatch = /[a-z]/;
+const letterMatch = /[a-z]/i;
 
 // to match dicrete quantities eg: carrot: 1, egg(s): 1
 
@@ -51,15 +62,15 @@ export const mapNonEmpty = (inputArray, targetKey) => {
  * @param {RegExp} matchExpression: a regular expression to determine where to separate field; often will match on /[a-z]/ to separate units with english letter names
  */
 const separateUnits = (valuePlusUnit, matchExpression) => {
-  let output = [];
+  const output = [];
   valuePlusUnit.forEach((element, index) => {
     // exec method returns an object including index of match
-    let execOutput = matchExpression.exec(element);
+    const execOutput = matchExpression.exec(element);
     // slice from start of string to index to return number. May include fractions eg 3/4.  will compute fraction to number later
 
     let value;
     let unit;
-    // need a condition here if execOutput falsy
+    // need a condition here if execOutput falsy eg: discrete quantities like egg white, 1
     if (!execOutput) {
       value = element;
       unit = "";
@@ -90,7 +101,7 @@ const separateUnits = (valuePlusUnit, matchExpression) => {
  */
 
 const correlate = (nameArray, valueArray) => {
-  let output = [];
+  const output = [];
   for (let i = 0; i < nameArray.length; i++) {
     // if value array is empty here set value to one eg: cinnamon stick
     if (!valueArray[i]) {
@@ -102,10 +113,13 @@ const correlate = (nameArray, valueArray) => {
   return output;
 };
 const convertFraction = (inputArray) => {
-  let output = [];
+  const output = [];
   let value;
   inputArray.forEach((element) => {
     let quantity = element[0];
+    if (quantity.match(/\u00BD/gi)) {
+      value = 0.5;
+    }
     if (quantity.match(/[/]/g)) {
       let execOutput = /[/]/g.exec(quantity);
       let leadingInteger;
@@ -135,18 +149,47 @@ const convertFraction = (inputArray) => {
 // this function takes an array with a number of non-standardized food measurements and converts as many as possible to mL
 // cases more specific to more general: kg then g, tbsp then tsp
 const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
-  let output = [];
+  const output = [];
   arrayWithMeasures.forEach((element) => {
-    let name = element[0];
+    const name = element[0];
     const quantity = element[indexOfValue];
     const unit = element[indexOfUnit];
     let value;
     if (unit === "") {
       // discrete quantity; call spoonacular for a conversion using ingredient name
-      return console.log(`call Spoonacular`);
+      // spoonacular needs id to get ingredient details; two api calls
+      // axios
+      //   .get(
+      //     `https://api.spoonacular.com/food/ingredients/search?apiKey=470f89a3fadd469b996a2f6b32154e1b&query=${name}`
+      //   )
+      //   .then((response) => {
+      //     let targetId = response.data.results[0].id;
+      //     return targetId;
+      //   })
+      //   .then((targetId) => {
+      //     setTimeout(() => {
+      //       // with id call spoonacular for item data
+      //       axios
+      //         .get(
+      //           `https://api.spoonacular.com/food/ingredients/${targetId}/information?apiKey=470f89a3fadd469b996a2f6b32154e1b`
+      //         )
+      //         .then((response) => {
+      //           let quantityPerServing =
+      //             response.data.nutrition;
+      //           console.log(response.data);
+      //           console.log(response.data.nutrition);
+      //         });
+      //     }, 1000);
+      //   });
+      return console.log(`call Spoonacular for ${name}`);
     }
     if (unit.match(/pinch/i)) {
       value = quantity * 0.31;
+      output.push([name, value, "ml"]);
+      return output;
+    }
+    if (unit.match(/^[lp][bo]/gi)) {
+      value = quantity * 454;
       output.push([name, value, "ml"]);
       return output;
     }
@@ -166,18 +209,32 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
       value = quantity * 5;
       output.push([name, value, "ml"]);
       return output;
+    }
+    if (unit.match(/m[il]/gi)) {
+      // expression to match ml, mil, millilitres
+      value = quantity;
+      output.push([name, value, "ml"]);
+      return output;
+    }
+    if (unit.match(/g(?:ram)?(?!r)(?!e)/gi)) {
+      // expression to match g, gram, grams
+      value = quantity;
+      output.push([name, value, "ml"]);
+      return output;
+    }
+    if (unit.match(/o[uz]/gi)) {
+      // expression to match oz, ounce, ounces
+      value = quantity * 30;
+      output.push([name, value, "ml"]);
+      return output;
     } else {
       // add item to an array that will be returned to user to ask what to do
       console.log(element);
     }
-    output.push([name, value, "ml"]);
+    // output.push([name, value, "ml"]);
   });
   return output;
 };
-// possibly improve this by populating an empty array instead of messing with an existing one
-
-// success!  all ingredients converted to mL.  This is not perfectly accurate but will serve to build a reasonable shopping list!
-// console.log(correlatedIngredients);
 
 export const ingredientTracker = (recipeList) => {
   let shoppingList = [];
@@ -188,7 +245,7 @@ export const ingredientTracker = (recipeList) => {
     ingredients.forEach(
       //comparison: an ingredient in a recipe
       (ingredient) => {
-        let currentList = [];
+        const currentList = [];
         // add each ingredient name in output to new array to check against
         shoppingList.forEach((element) => {
           currentList.push(element[0]);
@@ -224,7 +281,7 @@ export const recipeToIngredients = (recipe) => {
 };
 
 export const allSelectedIngredients = (meals) => {
-  let output = [];
+  const output = [];
   meals.forEach((meal) => {
     output.push(recipeToIngredients(meal));
   });
