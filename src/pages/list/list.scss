@@ -31,7 +31,8 @@
   }
   &__empty {
     @include mx.container;
-    width: 32.5rem;
+    width: 40rem;
+    height: 14rem;
   }
   &__message {
     @include mx.inset;

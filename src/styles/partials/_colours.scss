@@ -1,12 +1,28 @@
 
-$primary-background: darken($color: darkblue, $amount: 10);
+// Dark
 
-$primary-container: #00008b;
+// $primary-background: darken($color: darkblue, $amount: 10);
 
-$primary-inset: darken($color: darkblue, $amount: 20);
+// $primary-container: #00008b;
 
-$primary-text: #fffae3;
+// $primary-inset: darken($color: darkblue, $amount: 20);
 
-$hover: #6f1d1b;
+// $primary-text: #fffae3;
 
-$selected: darken($color: #6f1d1b, $amount: 15);
+// $hover: #6f1d1b;
+
+// $selected: darken($color: #6f1d1b, $amount: 15);
+
+// Light
+
+$primary-background: #fefae0;
+
+$primary-container: #e9edc9;
+
+$primary-inset: darken($color: #e9edc9, $amount: 20);
+
+$primary-text: darken($color: #d4a373, $amount:50);
+
+$hover: #d4a373;
+
+$selected: darken($color: #d4a373, $amount: 15);
