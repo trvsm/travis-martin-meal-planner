@@ -1,70 +1,87 @@
 import "./options.scss";
 
 import { Link } from "react-router-dom";
+import Recipe from "../../components/recipe/Recipe";
+import MealOptions from "../../components/mealOptions/MealOptions";
+import SelectedMeals from "../../components/selectedMeals/SelectedMeals";
 
-export default function Options() {
+export default function Options({
+  recipes,
+  filtered,
+  selected,
+  activeRecipe,
+  clickHandler,
+  submitHandler,
+  buttonHandler,
+}) {
   return (
-    <div className="options__wrapper">
-      <div className="options__left">
-        {/* list of search results or default meals */}
-        <div className="options__meals">
-          <h3 className="options__meals-title">Meals to choose from</h3>
-          {/* will map through options to generate this list */}
-          <ul className="options__meals-list">
-            <li className="options__meals-item">meal1</li>
-            <li className="options__meals-item">meal2</li>
-            <li className="options__meals-item">meal3</li>
-            <li className="options__meals-item">meal4</li>
-            <li className="options__meals-item">meal5</li>
-            <li className="options__meals-item">meal6</li>
-          </ul>
+    /* meal planning page for user.  Displays MealOptions form, SelectedMeals pane, and Recipe card. Handles state passed from App
+    props drilling to pass props to each appropriate component.
+    */
+    <>
+      <div className="options__wrapper">
+        <div className="options__left">
+          {/* list of search results or default meals */}
+          <section className="options__meals">
+            <h3 className="options__meals-title">Meals to choose from</h3>
+            {/* will map through options to generate this list */}
+            {Object.keys(filtered).length > 0 ? (
+              <MealOptions
+                props={filtered}
+                clickHandler={clickHandler}
+                submitHandler={submitHandler}
+                buttonHandler={buttonHandler}
+              />
+            ) : (
+              <MealOptions
+                props={recipes}
+                clickHandler={clickHandler}
+                submitHandler={submitHandler}
+                buttonHandler={buttonHandler}
+              />
+            )}
+          </section>
+
+          {/* list of user selected meals */}
+          <section className="options__selected">
+            <div className="options__top">
+              <h3 className="options__selected-title">Selected Meals</h3>
+              {/* will map through options to generate this list */}
+              {Object.keys(selected).length > 0 ? (
+                <SelectedMeals props={selected} clickHandler={clickHandler} />
+              ) : (
+                <p>please select meal options from above</p>
+              )}
+            </div>
+            {selected.length > 0 ? (
+              <Link to={"/list"}>
+                <div className="options__link">
+                  Get Your Shopping List {">"}
+                </div>
+              </Link>
+            ) : (
+              <div className="options__link">
+                Select meal options, then generate a shopping list!
+              </div>
+            )}
+          </section>
         </div>
 
-        {/* list of user selected meals */}
-        <div className="options__selected">
-          <h3 className="options__selected-title">Selected Meals</h3>
-          {/* will map through options to generate this list */}
-          <ul className="options__selected-list">
-            <li className="options__selected-item">meal1</li>
-            <li className="options__selected-item">meal2</li>
-            <li className="options__selected-item">meal3</li>
-            <li className="options__selected-item">meal4</li>
-            <li className="options__selected-item">meal5</li>
-            <li className="options__selected-item">meal6</li>
-          </ul>
-        </div>
+        {/* recipe for meal in focus */}
+        <section className="options__recipe-wrap">
+          <article className="options__recipe">
+            {Object.keys(activeRecipe).length > 0 ? (
+              <Recipe props={activeRecipe} />
+            ) : (
+              <>
+                <h3 className="options__recipe-title">
+                  Click a recipe to view details
+                </h3>
+              </>
+            )}
+          </article>
+        </section>
       </div>
-
-      {/* recipe for meal in focus */}
-      <div className="options__recipes">
-        <h3 className="options__recipe-title">Recipe Title -recipe in focus</h3>
-        <p className="options__recipe-description">
-          RECIPE DESCRIPTION: Lorem ipsum dolor, sit amet consectetur
-          adipisicing elit. Maiores debitis dolores autem quia, voluptas quo!
-        </p>
-        <ul className="options__recipe-ingredients">
-          Ingredients
-          <li className="options__ingredient">ingredient</li>
-          <li className="options__ingredient">ingredient</li>
-          <li className="options__ingredient">ingredient</li>
-          <li className="options__ingredient">ingredient</li>
-          <li className="options__ingredient">ingredient</li>
-          <li className="options__ingredient">ingredient</li>
-        </ul>
-        <ol className="options__recipe-instructions">
-          Instructions
-          <li className="options__step">step1</li>
-          <li className="options__step">step2</li>
-          <li className="options__step">step3</li>
-          <li className="options__step">step4</li>
-          <li className="options__step">step5</li>
-        </ol>
-        <Link to={"/list"}>
-          <div className="options__link">
-            Get Your Shopping List {">"}
-          </div>
-        </Link>
-      </div>
-    </div>
+    </>
   );
 }

@@ -1,0 +1,89 @@
+@use "../../styles/partials/mixins" as mx;
+@use "../../styles/partials/colours" as *;
+.wrapper {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+.contrast {
+  &__wrapper {
+    height: 94vh;
+    @include mx.container;
+    margin-right: 2.5rem;
+    width: 46vw;
+  }
+  &__title {
+    padding-bottom: 1rem;
+  }
+  &__output {
+    height: 85vh;
+    @include mx.inset;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+.list {
+  display: flex;
+  justify-content: flex-end;
+  height: 98vh;
+  &__title {
+    padding-bottom: 1rem;
+  }
+  &__empty {
+    @include mx.container;
+    width: 40rem;
+    height: 14rem;
+  }
+  &__message {
+    @include mx.inset;
+    margin-bottom: 1rem;
+  }
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__restart,
+  &__copy,
+  &__email {
+    @include mx.link;
+    @include mx.hover;
+    width: 10rem;
+    text-align: center;
+  }
+  &__wrapper {
+    height: 94vh;
+    @include mx.container;
+    width: 46vw;
+  }
+  &__output {
+    height: 79vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    @include mx.inset;
+    margin-bottom: 1rem;
+    list-style-type: circle;
+    list-style-position: outside;
+  }
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px dashed $primary-text;
+    margin-bottom: 0.25rem;
+    &::marker {
+      font-size: 1.5rem;
+      margin-right: 0;
+      margin-left: 2rem;
+    }
+  }
+  &__dropdown {
+    @include mx.dropdown;
+    width: 10rem;
+  }
+  &__copy {
+    border: none;
+    text-decoration: underline;
+    font-size: 1rem;
+    @include mx.link;
+  }
+}

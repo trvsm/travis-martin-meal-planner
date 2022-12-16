@@ -1,8 +1,6 @@
-@use "./styles/partials/colours" as *;
-@use "./styles/partials/mixins" as mx;
-html {
-  background-color: $primary-background;
-}
+@use "../partials/colours" as *;
+@use "../partials/mixins" as mx;
+
 *,
 html,
 body {
@@ -23,4 +21,7 @@ a {
 }
 :visited {
   color: $primary-text;
+}
+:checked + label {
+  background-color: $primary-inset;
 }

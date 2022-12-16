@@ -1,0 +1,55 @@
+// Dark theme
+
+// $primary-background: darken(
+//   $color: darkblue,
+//   $amount: 10,
+// );
+
+// $primary-container: #00008b;
+
+// $primary-inset: darken(
+//   $color: darkblue,
+//   $amount: 20,
+// );
+
+// $divider: darken(
+//   $color: darkblue,
+//   $amount: 25,
+// );
+
+// $primary-text: #fffae3;
+
+// $hover: #6f1d1b;
+
+// $selected: darken(
+//   $color: #6f1d1b,
+//   $amount: 15,
+// );
+
+// Light theme
+
+$primary-background: #fefae0;
+
+$primary-container: #e9edc9;
+
+$primary-inset: darken(
+  $color: #e9edc9,
+  $amount: 15,
+);
+
+$divider: darken(
+  $color: #e9edc9,
+  $amount: 25,
+);
+
+$primary-text: darken(
+  $color: #d4a373,
+  $amount: 50,
+);
+
+$hover: #d4a373;
+
+$selected: darken(
+  $color: #d4a373,
+  $amount: 15,
+);
