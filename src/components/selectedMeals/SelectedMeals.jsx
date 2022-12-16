@@ -2,8 +2,7 @@ import "../mealOptions/mealOptions.scss";
 export default function SelectedMeals({ props, clickHandler }) {
   return (
     // Similar component to MealOptions: when selected recipes set to state display recipe titles
-    // button clears state
-    <form className="meals__form--selected">
+    <div className="meals__form--selected">
       <fieldset className="meals__list">
         {Object.keys(props).length > 0 ? (
           props.map((recipe) => (
@@ -27,6 +26,6 @@ export default function SelectedMeals({ props, clickHandler }) {
           <label>loading...</label>
         )}
       </fieldset>
-    </form>
+    </div>
   );
 }

@@ -19,13 +19,12 @@
   &__meals,
   &__selected {
     height: 41vh;
-    background-color: darkblue;
     @include mx.container;
   }
   &__meals {
     margin-bottom: 1rem;
   }
-  &__selected{
+  &__selected {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -41,7 +40,6 @@
 
   &__recipe-wrap {
     width: 45vw;
-    background-color: darkblue;
     @include mx.container;
     height: 84vh;
     display: flex;

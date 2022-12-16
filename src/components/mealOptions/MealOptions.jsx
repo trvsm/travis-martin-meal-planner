@@ -1,5 +1,10 @@
 import "./mealOptions.scss";
-export default function MealOptions({ props, submitHandler, clickHandler, buttonHandler }) {
+export default function MealOptions({
+  props,
+  submitHandler,
+  clickHandler,
+  buttonHandler,
+}) {
   /* Meal Options component:
   checklist showing recipe titles from recipes state passed as props
   OnSubmit: checked recipes are set to selected state, selected recipes filtered from list 
@@ -30,9 +35,10 @@ export default function MealOptions({ props, submitHandler, clickHandler, button
         )}
       </fieldset>
       <div className="meals__buttons">
-
-      <button className="meals__button">add to selection</button>
-      <button className="meals__reset" type="button" onClick={buttonHandler}>reset selection</button>
+        <button className="meals__button">add to selection</button>
+        <button className="meals__reset" type="button" onClick={buttonHandler}>
+          reset selection
+        </button>
       </div>
     </form>
   );

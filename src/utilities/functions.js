@@ -4,38 +4,13 @@
 -functions to sum similar measurements
 - patterns to match & filter string data
 */
-// import axios from "axios";
-// const SPOONACULAR_KEY = process.env.REACT_APP_SPOONACULAR_KEY;
+
 // setup regular expressions for matching object fields and measurement terms
 export const ingredientMatch = /ingredient/i;
 export const measurementMatch = /measure/i;
 
-// const matchManyUnits = new RegExp(
-//   "^(?:pinch|^[lp][bo]|cup|t[ab][bls]|t[es][ap]|m[il]|g(?:ram)?(?!r)(?!e)|o[uz])",
-//   "gi"
-// );
-
 // match any letters to separate unit from quantity
 const letterMatch = /[a-z]/i;
-
-// to match dicrete quantities eg: carrot: 1, egg(s): 1
-
-// const noLetterMatch = /[^a-z]/gi;
-/* ??Do I want to leave discrete unconverted??  */
-
-// ensure cases where conversions are in measure just take first instance
-
-// match pinch. I see examples with simply pinch or 1 pinch... any case for 2?  probably simply convert to ml
-
-// match "can"
-
-// case where there's numbers & letters but no matched unit eg: bread: 8 slices
-// strip letters and compute as discrete
-
-// to match pure descriptive terms eg: sprinkle, to serve
-// TODO: unused, remove?
-
-// const noNumberMatch = /[^0-9^/^.]/;
 
 /**
  * Takes an array, uses a regular expresssion to locate a group of similarly named keys, add them to a target output array
@@ -159,29 +134,7 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
     if (unit === "") {
       // discrete quantity; call spoonacular for a conversion using ingredient name
       // spoonacular needs id to get ingredient details; two api calls
-      // axios
-      //   .get(
-      //     `https://api.spoonacular.com/food/ingredients/search?apiKey=470f89a3fadd469b996a2f6b32154e1b&query=${name}`
-      //   )
-      //   .then((response) => {
-      //     let targetId = response.data.results[0].id;
-      //     return targetId;
-      //   })
-      //   .then((targetId) => {
-      //     setTimeout(() => {
-      //       // with id call spoonacular for item data
-      //       axios
-      //         .get(
-      //           `https://api.spoonacular.com/food/ingredients/${targetId}/information?apiKey=470f89a3fadd469b996a2f6b32154e1b`
-      //         )
-      //         .then((response) => {
-      //           let quantityPerServing =
-      //             response.data.nutrition;
-      //           console.log(response.data);
-      //           console.log(response.data.nutrition);
-      //         });
-      //     }, 1000);
-      //   });
+      // TODO: find an alternative here; Spoonacular does not have serving size for items like cinnamon stick
       return console.log(`call Spoonacular for ${name}`);
     }
     if (unit.match(/pinch/i)) {
@@ -232,7 +185,6 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
       // add item to an array that will be returned to user to ask what to do
       console.log(element);
     }
-    // output.push([name, value, "ml"]);
   });
   return output;
 };

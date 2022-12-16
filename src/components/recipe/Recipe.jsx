@@ -1,4 +1,3 @@
-// importing a named export requires destructuring
 import { useEffect } from "react";
 import { useState } from "react";
 import {
@@ -7,7 +6,7 @@ import {
   measurementMatch,
 } from "../../utilities/functions";
 import RecipeIngredients from "../recipeIngredients/RecipeIngredients";
-import './recipe.scss';
+import "./recipe.scss";
 
 export default function Recipe({ props }) {
   /* Render recipe details
@@ -30,7 +29,7 @@ export default function Recipe({ props }) {
   };
   useEffect(() => {
     setLinkedIngredients(ingredientEntry());
-  },[props]);
+  }, [props]);
 
   const [linkedIngredients, setLinkedIngredients] = useState();
 
@@ -39,7 +38,11 @@ export default function Recipe({ props }) {
       {Object.keys(props).length > 0 ? (
         <>
           <h3 className="recipe__title">{props[0].strMeal}</h3>
-          <img className="recipe__pic" src={props[0].strMealThumb} alt={`picture of ${props[0].strMeal}`}/>
+          <img
+            className="recipe__pic"
+            src={props[0].strMealThumb}
+            alt={`picture of ${props[0].strMeal}`}
+          />
           <h5 className="recipe__label">Source:</h5>
           <a href={props[0].strSource} className="recipe__source">
             {props[0].strSource}

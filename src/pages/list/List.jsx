@@ -12,7 +12,6 @@ export default function List({ selected }) {
 -uses helper functions to run computations on each selected recipe, output ingredient & measure
 -check through all ingredients and sum any with the same ingredient name
 */
-  // TODO: add field to toggle unit
   // TODO: add modal to support manual resolution of unformatted ingredients
   const justIngredients = allSelectedIngredients(selected);
   const computed = ingredientTracker(justIngredients);
@@ -39,8 +38,12 @@ export default function List({ selected }) {
   }, [selected]);
 
   useEffect(() => {
-    setClipList(window.frames.document.getElementById("toPrint").innerText)
-    setMessage(encodeURIComponent(window.frames.document.getElementById("toPrint").innerText));
+    setClipList(window.frames.document.getElementById("toPrint").innerText);
+    setMessage(
+      encodeURIComponent(
+        window.frames.document.getElementById("toPrint").innerText
+      )
+    );
   }, [shoppingItem]);
 
   return (
@@ -63,9 +66,7 @@ export default function List({ selected }) {
           <ul className="list__output">
             {shoppingItem.map((ingredient) => (
               <li key={ingredient[0]} className="list__item">
-                <div className="list__item-contents">
-                  {ingredient[0]}
-                </div>
+                <div className="list__item-contents">{ingredient[0]}</div>
                 <select
                   className="list__dropdown"
                   id={ingredient[1]}

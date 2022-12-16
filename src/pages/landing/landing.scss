@@ -6,7 +6,13 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(-45deg, $primary-background, $primary-inset, $hover, $selected);
+  background: linear-gradient(
+    -45deg,
+    $primary-background,
+    $primary-inset,
+    $hover,
+    $selected
+  );
   background-size: 200% 200%;
   animation-name: bgscroll;
   animation-duration: 25s;
@@ -14,16 +20,16 @@ html {
   animation-direction: reverse;
   animation-timing-function: linear;
   @keyframes bgscroll {
-	0% {
-		background-position: 0% 0%;
-	}
-	50% {
-		background-position: 100% 100%;
-	}
-	100% {
-		background-position: 0% 0%;
-	}
-}
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
 }
 .landing {
   &__wrapper {
