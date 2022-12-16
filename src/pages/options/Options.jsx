@@ -12,11 +12,11 @@ export default function Options({
   activeRecipe,
   clickHandler,
   submitHandler,
-  buttonHandler
+  buttonHandler,
 }) {
   return (
-    /* meal planning page for user.  Handles state passed from App
-    props drilling to pass props to each appropriate component
+    /* meal planning page for user.  Displays MealOptions form, SelectedMeals pane, and Recipe card. Handles state passed from App
+    props drilling to pass props to each appropriate component.
     */
     <>
       <div className="options__wrapper">

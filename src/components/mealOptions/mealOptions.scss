@@ -1,6 +1,6 @@
 @use "../../styles/partials/mixins" as mx;
-@use  '../../styles/partials/colours' as *;
-@use '../../styles/partials/reset';
+@use "../../styles/partials/colours" as *;
+@use "../../styles/partials/reset";
 
 .meals {
   &__form {
@@ -17,37 +17,37 @@
     height: 27vh;
     overflow-x: hidden;
     overflow-y: auto;
-    @include mx.inset;
     border: none;
+    @include mx.inset;
   }
-  &__button,&__reset{
+  &__button,
+  &__reset {
     border: none;
     width: 16rem;
     @include mx.link;
     @include mx.hover;
   }
-  &__buttons{
+  &__buttons {
     display: flex;
     justify-content: space-between;
   }
-&__label{
+  &__label {
     display: flex;
-}
-&__text{
+  }
+  &__text {
     flex-grow: 1;
     border-radius: 0.5rem;
-    padding-left: .5rem;
+    padding-left: 0.5rem;
     margin: 0.25rem;
-}
-&__checkbox{
-    &--selected{
-        display: none;
+  }
+  &__checkbox {
+    &--selected {
+      display: none;
     }
+  }
 }
 
-}
-
-:checked + div{
-    background-color: $selected;
-    font-weight: bold;
+:checked + div {
+  background-color: $selected;
+  font-weight: bold;
 }

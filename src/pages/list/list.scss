@@ -1,5 +1,5 @@
 @use "../../styles/partials/mixins" as mx;
-@use '../../styles/partials/colours' as *;
+@use "../../styles/partials/colours" as *;
 .wrapper {
   width: 100vw;
   display: flex;
@@ -31,15 +31,24 @@
   }
   &__empty {
     @include mx.container;
-    width: 32.5rem;
+    width: 40rem;
+    height: 14rem;
   }
   &__message {
     @include mx.inset;
     margin-bottom: 1rem;
   }
-  &__restart {
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__restart,
+  &__copy,
+  &__email {
     @include mx.link;
     @include mx.hover;
+    width: 10rem;
+    text-align: center;
   }
   &__wrapper {
     height: 94vh;
@@ -67,8 +76,14 @@
       margin-left: 2rem;
     }
   }
-  &__dropdown{
+  &__dropdown {
     @include mx.dropdown;
     width: 10rem;
+  }
+  &__copy {
+    border: none;
+    text-decoration: underline;
+    font-size: 1rem;
+    @include mx.link;
   }
 }

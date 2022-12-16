@@ -4,38 +4,13 @@
 -functions to sum similar measurements
 - patterns to match & filter string data
 */
-// import axios from "axios";
-// const SPOONACULAR_KEY = process.env.REACT_APP_SPOONACULAR_KEY;
+
 // setup regular expressions for matching object fields and measurement terms
 export const ingredientMatch = /ingredient/i;
 export const measurementMatch = /measure/i;
 
-// const matchManyUnits = new RegExp(
-//   "^(?:pinch|^[lp][bo]|cup|t[ab][bls]|t[es][ap]|m[il]|g(?:ram)?(?!r)(?!e)|o[uz])",
-//   "gi"
-// );
-
 // match any letters to separate unit from quantity
 const letterMatch = /[a-z]/i;
-
-// to match dicrete quantities eg: carrot: 1, egg(s): 1
-
-// const noLetterMatch = /[^a-z]/gi;
-/* ??Do I want to leave discrete unconverted??  */
-
-// ensure cases where conversions are in measure just take first instance
-
-// match pinch. I see examples with simply pinch or 1 pinch... any case for 2?  probably simply convert to ml
-
-// match "can"
-
-// case where there's numbers & letters but no matched unit eg: bread: 8 slices
-// strip letters and compute as discrete
-
-// to match pure descriptive terms eg: sprinkle, to serve
-// TODO: unused, remove?
-
-// const noNumberMatch = /[^0-9^/^.]/;
 
 /**
  * Takes an array, uses a regular expresssion to locate a group of similarly named keys, add them to a target output array
@@ -119,6 +94,7 @@ const convertFraction = (inputArray) => {
     let quantity = element[0];
     if (quantity.match(/\u00BD/gi)) {
       value = 0.5;
+      output.push([value, element[1]])
     }
     if (quantity.match(/[/]/g)) {
       let execOutput = /[/]/g.exec(quantity);
@@ -158,29 +134,7 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
     if (unit === "") {
       // discrete quantity; call spoonacular for a conversion using ingredient name
       // spoonacular needs id to get ingredient details; two api calls
-      // axios
-      //   .get(
-      //     `https://api.spoonacular.com/food/ingredients/search?apiKey=470f89a3fadd469b996a2f6b32154e1b&query=${name}`
-      //   )
-      //   .then((response) => {
-      //     let targetId = response.data.results[0].id;
-      //     return targetId;
-      //   })
-      //   .then((targetId) => {
-      //     setTimeout(() => {
-      //       // with id call spoonacular for item data
-      //       axios
-      //         .get(
-      //           `https://api.spoonacular.com/food/ingredients/${targetId}/information?apiKey=470f89a3fadd469b996a2f6b32154e1b`
-      //         )
-      //         .then((response) => {
-      //           let quantityPerServing =
-      //             response.data.nutrition;
-      //           console.log(response.data);
-      //           console.log(response.data.nutrition);
-      //         });
-      //     }, 1000);
-      //   });
+      // TODO: find an alternative here; Spoonacular does not have serving size for items like cinnamon stick
       return console.log(`call Spoonacular for ${name}`);
     }
     if (unit.match(/pinch/i)) {
@@ -212,13 +166,13 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
     }
     if (unit.match(/m[il]/gi)) {
       // expression to match ml, mil, millilitres
-      value = quantity;
+      value = +quantity;
       output.push([name, value, "ml"]);
       return output;
     }
     if (unit.match(/g(?:ram)?(?!r)(?!e)/gi)) {
       // expression to match g, gram, grams
-      value = quantity;
+      value = +quantity;
       output.push([name, value, "ml"]);
       return output;
     }
@@ -231,7 +185,6 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
       // add item to an array that will be returned to user to ask what to do
       console.log(element);
     }
-    // output.push([name, value, "ml"]);
   });
   return output;
 };
@@ -239,22 +192,21 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
 export const ingredientTracker = (recipeList) => {
   let shoppingList = [];
   for (let recipeIndex = 0; recipeIndex < recipeList.length; recipeIndex++) {
-    // for each remaining ingredients compare to what's in output array
+    // for each remaining ingredients compare to what is in output array
     // if match add to existing, else create new entry
     let ingredients = recipeList[recipeIndex];
     ingredients.forEach(
-      //comparison: an ingredient in a recipe
       (ingredient) => {
         const currentList = [];
         // add each ingredient name in output to new array to check against
         shoppingList.forEach((element) => {
-          currentList.push(element[0]);
+          currentList.push(element[0].toLowerCase());
         });
         // if current ingredients contains ingredient add ingredient quantity to existing quantity
-        if (currentList.find((element) => element === ingredient[0])) {
+        if (currentList.find((element) => element === (ingredient[0].toLowerCase()))) {
           //   for each entry in output array, if element[0](ingredient name) matches ingredient[0] add quantity
           shoppingList.forEach((element) => {
-            if (element[0] === ingredient[0]) {
+            if ((element[0].toLowerCase()) === (ingredient[0].toLowerCase())) {
               // element[1] & ingredient[1] hold logged and current quantities of ingredient respectively
               element[1] += ingredient[1];
             }
@@ -266,6 +218,7 @@ export const ingredientTracker = (recipeList) => {
       }
     );
   }
+  shoppingList.sort();
   return shoppingList;
 };
 
@@ -287,5 +240,3 @@ export const allSelectedIngredients = (meals) => {
   });
   return output;
 };
-
-// console.log(something(pair));

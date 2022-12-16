@@ -10,6 +10,8 @@ import Options from "./pages/options/Options";
 const BACK_END = process.env.REACT_APP_BACK_END;
 
 function App() {
+  // Handle state and routing for app
+  
   const [recipes, setRecipes] = useState([]);
 
   // when checklist form submitted set all checked meals to state
@@ -19,15 +21,13 @@ function App() {
 
   const [activeRecipe, setActiveRecipe] = useState({});
 
-
   useEffect(() => {
-    // on page load get recipes.  May end up moving this state up to app if search implemented; landing will set state and pass down
+    // on page load get recipes.
     axios.get(`${BACK_END}/recipes`).then((response) => {
       setRecipes(response.data);
     });
   }, []);
 
-  // don't invoke handler on the element using it, else it will run when element renders
   const clickHandler = (event) => {
     const clicked = event.target.id;
     // find the recipe that matches id of clicked recipe and set to state to display
@@ -43,7 +43,6 @@ function App() {
         checked.push(event.target[index].id);
       }
     }
-    // will this work with spread operator, or start with checked = selected above?
     setFiltered(
       recipes.filter((recipe) => checked.indexOf(recipe.idMeal) === -1)
     );

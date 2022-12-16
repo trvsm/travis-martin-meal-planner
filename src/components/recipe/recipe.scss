@@ -1,6 +1,15 @@
-
-.recipe{
-    &__label{
-        padding-top: 1rem;
-    }
+.recipe {
+  &__label {
+    padding-top: 1rem;
+    font-size: 1rem;
+  }
+  &__ingredients-title {
+    font-size: 1rem;
+  }
+  &__pic {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 0.5rem;
+    box-shadow: 0.25rem 0.25rem 0.5rem black;
+  }
 }
