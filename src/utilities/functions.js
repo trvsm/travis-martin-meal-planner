@@ -212,13 +212,13 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
     }
     if (unit.match(/m[il]/gi)) {
       // expression to match ml, mil, millilitres
-      value = quantity;
+      value = +quantity;
       output.push([name, value, "ml"]);
       return output;
     }
     if (unit.match(/g(?:ram)?(?!r)(?!e)/gi)) {
       // expression to match g, gram, grams
-      value = quantity;
+      value = +quantity;
       output.push([name, value, "ml"]);
       return output;
     }
@@ -239,22 +239,21 @@ const convertMeasures = (arrayWithMeasures, indexOfValue, indexOfUnit) => {
 export const ingredientTracker = (recipeList) => {
   let shoppingList = [];
   for (let recipeIndex = 0; recipeIndex < recipeList.length; recipeIndex++) {
-    // for each remaining ingredients compare to what's in output array
+    // for each remaining ingredients compare to what is in output array
     // if match add to existing, else create new entry
     let ingredients = recipeList[recipeIndex];
     ingredients.forEach(
-      //comparison: an ingredient in a recipe
       (ingredient) => {
         const currentList = [];
         // add each ingredient name in output to new array to check against
         shoppingList.forEach((element) => {
-          currentList.push(element[0]);
+          currentList.push(element[0].toLowerCase());
         });
         // if current ingredients contains ingredient add ingredient quantity to existing quantity
-        if (currentList.find((element) => element === ingredient[0])) {
+        if (currentList.find((element) => element === (ingredient[0].toLowerCase()))) {
           //   for each entry in output array, if element[0](ingredient name) matches ingredient[0] add quantity
           shoppingList.forEach((element) => {
-            if (element[0] === ingredient[0]) {
+            if ((element[0].toLowerCase()) === (ingredient[0].toLowerCase())) {
               // element[1] & ingredient[1] hold logged and current quantities of ingredient respectively
               element[1] += ingredient[1];
             }
@@ -266,6 +265,7 @@ export const ingredientTracker = (recipeList) => {
       }
     );
   }
+  shoppingList.sort();
   return shoppingList;
 };
 
