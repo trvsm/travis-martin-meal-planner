@@ -119,6 +119,7 @@ const convertFraction = (inputArray) => {
     let quantity = element[0];
     if (quantity.match(/\u00BD/gi)) {
       value = 0.5;
+      output.push([value, element[1]])
     }
     if (quantity.match(/[/]/g)) {
       let execOutput = /[/]/g.exec(quantity);
