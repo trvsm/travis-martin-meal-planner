@@ -69,7 +69,7 @@ export default function List({ selected }) {
                 <div className="list__item-contents">{ingredient[0]}</div>
                 <select
                   className="list__dropdown"
-                  id={ingredient[1]}
+                  id={`${ingredient[0]}${ingredient[1]}${ingredient[2]}`}
                   defaultValue={1}
                 >
                   <option value={1} className="list__option">
