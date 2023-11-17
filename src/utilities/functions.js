@@ -20,6 +20,7 @@ const letterMatch = /[a-z]/i;
  */
 export const mapNonEmpty = (inputArray, targetKey) => {
   const output = [];
+  //TODO: this is a filtering an array, not map
   inputArray.map((entry) => {
     if (entry[0].match(targetKey)) {
       if (entry[1]) {
@@ -94,7 +95,7 @@ const convertFraction = (inputArray) => {
     let quantity = element[0];
     if (quantity.match(/\u00BD/gi)) {
       value = 0.5;
-      output.push([value, element[1]])
+      output.push([value, element[1]]);
     }
     if (quantity.match(/[/]/g)) {
       let execOutput = /[/]/g.exec(quantity);
@@ -196,6 +197,7 @@ export const ingredientTracker = (recipeList) => {
     // if match add to existing, else create new entry
     let ingredients = recipeList[recipeIndex];
     ingredients.forEach(
+      //TODO: unsafe references to shoppingList: fix build list on ingredients.forEach, build separate function to compare to existing list
       (ingredient) => {
         const currentList = [];
         // add each ingredient name in output to new array to check against
@@ -203,10 +205,12 @@ export const ingredientTracker = (recipeList) => {
           currentList.push(element[0].toLowerCase());
         });
         // if current ingredients contains ingredient add ingredient quantity to existing quantity
-        if (currentList.find((element) => element === (ingredient[0].toLowerCase()))) {
+        if (
+          currentList.find((element) => element === ingredient[0].toLowerCase())
+        ) {
           //   for each entry in output array, if element[0](ingredient name) matches ingredient[0] add quantity
           shoppingList.forEach((element) => {
-            if ((element[0].toLowerCase()) === (ingredient[0].toLowerCase())) {
+            if (element[0].toLowerCase() === ingredient[0].toLowerCase()) {
               // element[1] & ingredient[1] hold logged and current quantities of ingredient respectively
               element[1] += ingredient[1];
             }
