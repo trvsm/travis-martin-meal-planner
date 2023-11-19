@@ -32,13 +32,12 @@ html {
   }
 }
 .landing {
-  &__wrapper {
-    @include mx.container;
-    display: flex;
-    flex-direction: column;
-    height: 14rem;
-    width: 40rem;
-  }
+  height: 100vh;
+  width: 100vw;
+  @include mx.container;
+  display: flex;
+  flex-direction: column;
+
   &__text {
     @include mx.inset;
     margin-bottom: 1rem;

@@ -11,7 +11,7 @@ const BACK_END = process.env.REACT_APP_BACK_END;
 
 function App() {
   // Handle state and routing for app
-  
+
   const [recipes, setRecipes] = useState([]);
 
   // when checklist form submitted set all checked meals to state
@@ -57,7 +57,24 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={<Landing />}>
+          {/* Nest Routes in here, navigate to them via outlet element on landing */}
+          <Route
+            path="/meal-out"
+            element={
+              <Options
+                filtered={filtered}
+                selected={selected}
+                activeRecipe={activeRecipe}
+                recipes={recipes}
+                clickHandler={clickHandler}
+                submitHandler={submitHandler}
+                buttonHandler={buttonHandler}
+              />
+            }
+          />
+          <Route path="/list-out" element={<List selected={selected} />} />
+        </Route>
         <Route
           path="/meals"
           element={
