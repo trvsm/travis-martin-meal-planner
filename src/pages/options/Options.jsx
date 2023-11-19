@@ -54,7 +54,7 @@ export default function Options({
               )}
             </div>
             {selected.length > 0 ? (
-              <Link to={"/list"}>
+              <Link to={"/shopping list"}>
                 <div className="options__link">
                   Get Your Shopping List {">"}
                 </div>

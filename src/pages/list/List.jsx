@@ -8,7 +8,7 @@ import {
 } from "../../utilities/functions";
 
 export default function List({ selected }) {
-  /* Key feature of Meal Planner:
+  /* Key feature of Meal Compiler:
 -uses helper functions to run computations on each selected recipe, output ingredient & measure
 -check through all ingredients and sum any with the same ingredient name
 */
@@ -38,19 +38,20 @@ export default function List({ selected }) {
   }, [selected]);
 
   useEffect(() => {
-    setClipList(window.frames.document.getElementById("toPrint").innerText);
-    setMessage(
-      encodeURIComponent(
-        window.frames.document.getElementById("toPrint").innerText
-      )
-    );
+    const print = window.frames.document.getElementById("toPrint")
+      ? window.frames.document.getElementById("toPrint").innerText
+      : "empty";
+    setClipList(print);
+    setMessage(encodeURIComponent(print));
   }, [shoppingItem]);
 
   return (
     <div className="wrapper">
       {messyIngredients ? (
         <div className="contrast__wrapper">
-          <h2 className="contrast__title">Meal Planner takes all this info:</h2>
+          <h2 className="contrast__title">
+            Meal Compiler takes all this info:
+          </h2>
           <div className="contrast__output">
             {messyIngredients.map((ingredient, index) => (
               <p key={`${ingredient}${index}`}>{ingredient}</p>
@@ -58,7 +59,7 @@ export default function List({ selected }) {
           </div>
         </div>
       ) : (
-        ""
+        "Select recipes to create a shopping list!"
       )}
       {Object.keys(shoppingItem).length > 0 ? (
         <div className="list__wrapper" id="toPrint">

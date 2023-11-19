@@ -60,7 +60,7 @@ function App() {
         <Route path="/" element={<Landing />}>
           {/* Nest Routes in here, navigate to them via outlet element on landing */}
           <Route
-            path="/meal-out"
+            path="/plan"
             element={
               <Options
                 filtered={filtered}
@@ -73,7 +73,7 @@ function App() {
               />
             }
           />
-          <Route path="/list-out" element={<List selected={selected} />} />
+          <Route path="/shopping list" element={<List selected={selected} />} />
         </Route>
         <Route
           path="/meals"

@@ -1,6 +1,7 @@
-# Meal Planner
+# Meal Compiler
 
 ## Goal of this project:
+
 Simplify user experience with online recipes.  
 Why? Online recipes don't play well with the flow of cooking:  
 -gather supplies  
@@ -8,6 +9,7 @@ Why? Online recipes don't play well with the flow of cooking:
 -enjoy
 
 ## Using this web app
+
 -download this repo  
 -npm i
 
