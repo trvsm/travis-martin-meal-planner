@@ -7,6 +7,7 @@ const pages = ["welcome", "plan", "shopping list", "import recipe"];
 export default function Landing() {
   // simple landing page to help user understand what to expect
   return (
+    //check path: if on sonething other than landing just render nav & outlet
     <>
       <div className="landing">
         <nav className="landing__nav">
