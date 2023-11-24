@@ -19,6 +19,20 @@ export default function AddRecipe() {
        * @strMealThumb an image to display: set this to a simple placeholder
        * @strSource link to recipe source: set this to simply "User uploaded recipe"
        */}
+      <form className="add-recipe__form">
+        <section className="add-recipe__top">
+          <input placeholder="" type="text" className="strMeal" />
+          <input placeholder="" type="text" className="strArea" />
+          <input placeholder="" type="text" className="strCategory" />
+          <textarea
+            className="strInstructions"
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+          ></textarea>
+        </section>
+      </form>
     </>
   );
 }
