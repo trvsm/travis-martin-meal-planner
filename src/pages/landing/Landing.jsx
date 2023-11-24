@@ -14,7 +14,7 @@ export default function Landing() {
       <div className="landing">
         <nav className="landing__nav">
           {pages.map((page) => (
-            <Link
+            <Link key={`${page}`}
               className="landing__link"
               to={page === "welcome" ? "/" : `${page}`}
             >
