@@ -39,12 +39,12 @@ $primary-inset: darken(
 
 $divider: lighten(
   $color: #1f1f2f,
-  $amount: 25,
+  $amount: 35,
 );
 
 $primary-text: #e0e0dd;
 
 //this color is part of old palette
-$hover: #d4a373;
+$hover: $divider;
 
 $selected: #8989c6;
