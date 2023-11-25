@@ -21,9 +21,51 @@ export default function AddRecipe() {
        */}
       <form className="add-recipe__form">
         <section className="add-recipe__top">
-          <input placeholder="" type="text" className="strMeal" />
-          <input placeholder="" type="text" className="strArea" />
-          <input placeholder="" type="text" className="strCategory" />
+          <input placeholder="Recipe Name" type="text" className="strMeal" />
+          <select className="strArea">
+            <option disabled selected value="">
+              Culinary Region:
+            </option>
+            <option value="African">African</option>
+            <option value="American">American</option>
+            <option value="Brazilian">Brazilian</option>
+            <option value="Chinese">Chinese</option>
+            <option value="French">French</option>
+            <option value="Indian">Indian</option>
+            <option value="Italian">Italian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Korean">Korean</option>
+            <option value="Mediterranean">Mediterranean</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Middle Eastern">Middle Eastern</option>
+            <option value="Spanish">Spanish</option>
+            <option value="Thai">Thai</option>
+            <option value="Vietnamese">Vietnamese</option>
+          </select>
+          {/* Beef Dishes Breakfast Dishes Chicken Dishes Casserole Dishes Grilled
+          Dishes Lamb Dishes Noodle Dishes Pasta Dishes Pork Dishes Rice Dishes
+          Sandwiches and Wraps Seafood Dishes Soup and Stew Dishes Vegan Dishes
+          Vegetarian Dishes */}
+          <select className="strCategory">
+            <option value="" disabled selected>
+              Category:
+            </option>
+            <option value="Beef">Beef</option>
+            <option value="Break">Break</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Chicken">Chicken</option>
+            <option value="Casserole">Casserole</option>
+            <option value="Grill">Grill</option>
+            <option value="Handheld">Handheld</option>
+            <option value="Lamb">Lamb</option>
+            <option value="Noodle">Noodle</option>
+            <option value="Pork">Pork</option>
+            <option value="Rice">Rice</option>
+            <option value="Seafood">Seafood</option>
+            <option value="Soup">Soup</option>
+            <option value="Vegan">Vegan</option>
+            <option value="Vegetarian">Vegetarian</option>
+          </select>
           <textarea
             className="strInstructions"
             name=""
