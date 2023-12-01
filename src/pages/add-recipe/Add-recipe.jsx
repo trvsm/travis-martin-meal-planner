@@ -1,5 +1,13 @@
+import IngredientInput from "../../components/ingredientInput/IngredientInput";
+import { useState } from "react";
+const ingredPlaceholder = {
+  strIngredient: "placeholder",
+  strMeasure: "placeholder",
+};
+
 // support user writing recipe with ingredients by line, write to database
 export default function AddRecipe() {
+  const [ingredientNum, setIngredientNum] = useState([]);
   return (
     <>
       {/** Required fields:
@@ -74,6 +82,27 @@ export default function AddRecipe() {
             rows="10"
           ></textarea>
         </section>
+        {/* an array of ingredients
+        onclick of plus button add another
+        pass props to build unique ingredients
+
+        */}
+        {ingredientNum.length ? (
+          ingredientNum.map((_ingredientSlot, index) => {
+            return <IngredientInput key={index} ingredientNum={index} />;
+          })
+        ) : (
+          <p>Click the button to add up to 20 ingredients</p>
+        )}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            setIngredientNum([...ingredientNum, ingredPlaceholder]);
+          }}
+        >
+          Add another ingredient
+        </button>
       </form>
     </>
   );
