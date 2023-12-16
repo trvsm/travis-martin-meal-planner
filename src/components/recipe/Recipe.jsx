@@ -41,7 +41,7 @@ export default function Recipe({ props }) {
           <img
             className="recipe__pic"
             src={props[0].strMealThumb}
-            alt={`picture of ${props[0].strMeal}`}
+            alt={props[0].strMeal}
           />
           <h5 className="recipe__label">Source:</h5>
           <a href={props[0].strSource} className="recipe__source">
