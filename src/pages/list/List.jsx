@@ -7,6 +7,11 @@ import {
   allSelectedIngredients,
 } from "../../utilities/functions";
 
+// TODO: display list items with checkbox
+// TODO: support adding entries directly to list
+// TODO: save list to save to database
+// TODO: export to markdown
+// TODO: export to email
 export default function List({ selected }) {
   /* Key feature of Meal Compiler:
 -uses helper functions to run computations on each selected recipe, output ingredient & measure

@@ -8,6 +8,11 @@ const ingredPlaceholder = {
 // support user writing recipe with ingredients by line, write to database
 export default function AddRecipe() {
   const [ingredientNum, setIngredientNum] = useState([]);
+
+  function ingredClick(e){
+    e.preventDefault();
+    setIngredientNum([...ingredientNum, ingredPlaceholder])
+  }
   return (
     <>
       {/** Required fields:
@@ -89,12 +94,12 @@ export default function AddRecipe() {
         */}
         {ingredientNum.length ? (
           ingredientNum.map((_ingredientSlot, index) => {
-            return <IngredientInput key={index} ingredientNum={index} />;
+            return <IngredientInput key={index} ingredientNum={index} buttonClick={ingredClick}/>;
           })
         ) : (
           <p>Click the button to add up to 20 ingredients</p>
         )}
-        <button
+        {/* <button
           type="button"
           onClick={(e) => {
             e.preventDefault();
@@ -102,7 +107,7 @@ export default function AddRecipe() {
           }}
         >
           Add another ingredient
-        </button>
+        </button> */}
       </form>
     </>
   );

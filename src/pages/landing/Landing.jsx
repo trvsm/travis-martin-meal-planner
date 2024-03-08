@@ -2,7 +2,13 @@ import "../../App.scss";
 import "./landing.scss";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
-const pages = ["welcome", "plan", "shopping list", "upload recipe"];
+const pages = [
+  "welcome",
+  "conventional_list",
+  "plan",
+  "compiled_list",
+  "upload_recipe",
+];
 
 export default function Landing() {
   // simple landing page to help user understand what to expect
@@ -13,6 +19,7 @@ export default function Landing() {
     <>
       <div className="landing">
         <nav className="landing__nav">
+          {/* TODO: link straight to list */}
           {pages.map((page) => (
             <Link
               key={`${page}`}
@@ -35,6 +42,11 @@ export default function Landing() {
             <Link to={"/plan"}>
               <div className="landing__start">
                 Start planning with pre-selected recipes {">"}
+              </div>
+            </Link>
+            <Link to={"/conventional_list"}>
+              <div className="landing__list">
+                Jump to shopping list builder {">"}
               </div>
             </Link>
           </section>
