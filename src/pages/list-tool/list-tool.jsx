@@ -10,7 +10,7 @@ import IngredientInput from "../../components/ingredientInput/IngredientInput";
 
 // State I might need: list length, list contents
 
-export default function List_tool() {
+export default function ListTool() {
   const saveIngredToList = (values) => {
     console.log(values);
     setGrocList([...grocList, values]);

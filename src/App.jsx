@@ -7,7 +7,7 @@ import Landing from "./pages/landing/Landing";
 import List from "./pages/list/List";
 import Options from "./pages/options/Options";
 import AddRecipe from "./pages/add-recipe/Add-recipe";
-import List_tool from "./pages/list-tool/list-tool";
+import ListTool from "./pages/list-tool/list-tool";
 
 const BACK_END = process.env.REACT_APP_BACK_END;
 
@@ -93,7 +93,7 @@ function App() {
           }
         />
         <Route path="/list" element={<List selected={selected} />} />
-        <Route path="/conventional_list" element={<List_tool/>}/>
+        <Route path="/conventional_list" element={<ListTool />} />
       </Routes>
     </BrowserRouter>
   );

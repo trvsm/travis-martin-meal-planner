@@ -21,13 +21,13 @@ const letterMatch = /[a-z]/i;
 export const mapNonEmpty = (inputArray, targetKey) => {
   const output = [];
   //TODO: this is a filtering an array, not map
-  inputArray.map((entry) => {
-    if (entry[0].match(targetKey)) {
-      if (entry[1]) {
-        // if truthy; if field is not empty push the value to output.  Since this is a flattened object desired value should always be index 1.
-        output.push(entry[1]);
-      }
-    }
+  inputArray.filter((entry) =>{
+    return entry[0].match(targetKey)
+      ? entry[1]
+        ? // if truthy; if field is not empty push the value to output.  Since this is a flattened object desired value should always be index 1.
+          output.push(entry[1])
+        : ""
+      : "";
   });
   return output;
 };
