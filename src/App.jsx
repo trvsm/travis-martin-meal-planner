@@ -59,8 +59,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing />}>
+        {/* match / on exact otherwise extra content rendered */}
+        <Route path="/" exact element={<Landing />}>
           {/* Nest Routes in here, navigate to them via outlet element on landing */}
+          <Route path="/compiled_list" element={<List selected={selected} />} />
+          {/* TODO: correct containers */}
           <Route
             path="/plan"
             element={
@@ -75,25 +78,24 @@ function App() {
               />
             }
           />
-          <Route path="/compiled_list" element={<List selected={selected} />} />
           <Route path="/upload_recipe" element={<AddRecipe />} />
+          <Route
+            path="/meals"
+            element={
+              <Options
+                filtered={filtered}
+                selected={selected}
+                activeRecipe={activeRecipe}
+                recipes={recipes}
+                clickHandler={clickHandler}
+                submitHandler={submitHandler}
+                buttonHandler={buttonHandler}
+              />
+            }
+          />
+          <Route path="/list" element={<List selected={selected} />} />
+          <Route path="/conventional_list" element={<ListTool />} />
         </Route>
-        <Route
-          path="/meals"
-          element={
-            <Options
-              filtered={filtered}
-              selected={selected}
-              activeRecipe={activeRecipe}
-              recipes={recipes}
-              clickHandler={clickHandler}
-              submitHandler={submitHandler}
-              buttonHandler={buttonHandler}
-            />
-          }
-        />
-        <Route path="/list" element={<List selected={selected} />} />
-        <Route path="/conventional_list" element={<ListTool />} />
       </Routes>
     </BrowserRouter>
   );

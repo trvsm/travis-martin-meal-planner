@@ -7,6 +7,7 @@
 
 import { useState } from "react";
 import IngredientInput from "../../components/ingredientInput/IngredientInput";
+import axios from "axios";
 
 // State I might need: list length, list contents
 
@@ -30,15 +31,36 @@ export default function ListTool() {
             return (
               <div key={index}>
                 <input type="checkbox" />
-                {`${grocList[index].quantity} ${grocList[index].unit} of: ${grocList[index].ingredient}`}
+                {`${item.quantity} ${item.unit} of: ${item.ingredient}`}
               </div>
             );
           })
         ) : (
           <p>Shopping List items will show here</p>
         )}
-        {/* need input and plus button */}
+        {/* TODO: take current state, save to database
+        database needs an endpoint that accepts post
+        need some sort of value tied to database obj for retrieval
+        need some ui to make this happen
+        */}
       </div>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          axios
+            .post(
+              "http://localhost:1024/save-list",
+              //need an obj with key here
+              { data: JSON.stringify(grocList) }
+            )
+            .then((res) => {
+              console.log(res);
+            });
+          // console.log(JSON.stringify(grocList));
+        }}
+      >
+        Save This Shopping List
+      </button>
     </div>
   );
 }
